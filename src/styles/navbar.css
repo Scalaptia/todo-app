@@ -1,0 +1,29 @@
+.navbar {
+    position: fixed;
+    background-color: var(--front-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar > ul {
+    margin: 0;
+    padding: 0;
+    width: 16rem;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.navbar > ul > li {
+    font-size: 16px;
+    list-style: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 10px;
+    transition: all 0.1s ease-in-out;
+}
+
+.navbar > ul > li:hover {
+    background-color: var(--background-hover);;
+}

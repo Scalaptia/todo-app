@@ -1,4 +1,4 @@
 import './styles/main.css';
-import generatePage from './modules/pageUI';
+import generatePage from './ui/pageUI';
 
 generatePage();

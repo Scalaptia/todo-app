@@ -1,3 +1,5 @@
+import '../styles/navbar.css'
+import pageLoad from "./pageLoad";
 import { app } from "./pageUI";
 
 const createTab = (tabName: string, tabPage: any) => {
@@ -12,16 +14,14 @@ const createTab = (tabName: string, tabPage: any) => {
 }
 
 export const NavBar = () => {
-    const navbar = document.createElement('nav');
+    const navbar = document.createElement('div');
     navbar.classList.add('navbar')
     const ul = document.createElement('ul');
 
-    ul.appendChild(createTab('Home', Home()));
-    ul.appendChild(createTab('Menu', Menu()));
-    ul.appendChild(createTab('About', About()));
+    ul.appendChild(createTab('Default', '/#'));
     navbar.appendChild(ul);
 
     app!.appendChild(navbar);
 
-    return container;
+    return navbar;
 }
