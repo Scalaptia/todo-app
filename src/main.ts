@@ -1,9 +1,4 @@
 import './styles/main.css';
+import generatePage from './modules/pageUI';
 
-const app = document.querySelector<HTMLDivElement>('#app');
-
-
-app!.innerHTML = /*html*/`
-  <div class="w-screen h-screen bg-slate-950">
-    </div>
-`;
+generatePage();
