@@ -10,6 +10,7 @@
 /* Header */
 .nav-header {
     display: flex;
+    height: 4rem;
     align-items: center;
     gap: 20px;
     margin-bottom: 10px;
@@ -59,7 +60,7 @@
     transition: all 0.1s ease-in-out;
 }
 
-.tab:hover {
+.tab:hover, .tab[data-selected = 'true'] {
     outline: 1px solid var(--text-color);
     color: var(--text-selected);
     background-color: var(--background-hover);;

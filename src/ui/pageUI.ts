@@ -1,5 +1,6 @@
 import '../styles/main.css'
-import { NavBar } from "./navbar";
+import LightMode from '../assets/light-mode.svg'
+import { navbar } from './navbar';
 
 export const app = document.querySelector<HTMLDivElement>('#app');
 
@@ -10,5 +11,6 @@ export function createElement(tag: string, className: string) {
 }
 
 export default function generatePage() {
-        app!.appendChild(NavBar())
+        app!.appendChild(navbar.container)
+        navbar.createTab('project', 'test', 'test-class', LightMode);
 }
