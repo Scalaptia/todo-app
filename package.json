@@ -12,5 +12,8 @@
   "devDependencies": {
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
+  },
+  "dependencies": {
+    "emoji-type": "^1.0.4"
   }
 }
