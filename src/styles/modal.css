@@ -1,0 +1,103 @@
+.modal {
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s ease-in-out;
+    z-index: 1;
+}
+
+.modal[data-show = 'false'] {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.modal[data-show = 'true'] {
+    opacity: 1;
+}
+
+.modal-container {
+    background-color: var(--background);
+    border-radius: 10px;
+    padding: 20px;
+    width: clamp(16rem, 50%, 32rem);
+}
+
+.modal-title {
+    background-color: var(--front-color);
+    margin: 0;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 10px;
+    color: var(--text-selected);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: var(--front-color);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--text-selected);
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px;
+}
+
+input {
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: var(--text-selected);
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    background-color: var(--front-secondary);
+}
+
+input:focus {
+    background-color: var(--background-hover);
+}
+
+.form-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.form-buttons button {
+    color: var(--text-selected);
+    outline: none;
+    border: none;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    width: 5rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.form-cancel-btn {
+    background-color: #881337;
+}
+
+.form-cancel-btn:hover {
+    background-color: #be123c;
+}
+
+.form-submit-btn {
+    background-color: #064e3b;
+}
+
+.form-submit-btn:hover {
+    background-color: #047857;
+}
+
+

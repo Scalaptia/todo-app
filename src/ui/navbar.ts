@@ -8,6 +8,7 @@ import todayTasks from '../assets/today.svg';
 import weekTasks from '../assets/week.svg';
 import importantTasks from '../assets/important.svg'
 import projectIcon from '../assets/menu.svg'
+import { modal } from './modal';
 
 const NavHeader = () => {
     const navHeader = createElement('div', 'nav-header');
@@ -31,7 +32,9 @@ const TaskList = () => {
     const container = createElement('div', 'task-list')
         const ul = createElement('ul', 'tasks');
         container.appendChild(ul);
-    return container;
+    return {
+        container
+    }
 }
 
 const ProjectList = () => {
@@ -45,21 +48,25 @@ const ProjectList = () => {
             const addBtn = document.createElement('img');
             addBtn.classList.add('add-btn', 'svg');
             addBtn.src = addSVG
+            addBtn.addEventListener('click', () => {modal.projectModal()});
             titleSection.appendChild(addBtn);
         container.appendChild(titleSection)
 
         const ul = createElement('ul', 'projects');
         container.appendChild(ul);
-    return container;
+        
+    return {
+        container
+    }
 }
 
-const NavBar = () => {
+const createNavBar = () => {
     const container = createElement('div', 'navbar');
         const sidebar = createElement('div', 'sidebar');
             const taskList = TaskList()
-            sidebar.appendChild(taskList);
+            sidebar.appendChild(taskList.container);
             const projectList = ProjectList()
-            sidebar.appendChild(projectList);
+            sidebar.appendChild(projectList.container);
 
         container.appendChild(NavHeader());
         container.appendChild(sidebar);
@@ -74,8 +81,8 @@ const NavBar = () => {
             tabName.textContent = name;
     
         tab.addEventListener('click', () => {
-            const taskElements = taskList?.children;
-            const projectElements = projectList?.children;
+            const taskElements = taskList.container?.children;
+            const projectElements = projectList.container?.children;
     
             for (let i = 0; i < taskElements!.length; i++) {
                 const item: any = taskElements![i];
@@ -90,17 +97,17 @@ const NavBar = () => {
             tab.dataset.selected = 'true'
             pageLoad(page);
         });
-        
+
         tab.appendChild(tabSVG);
         tab.appendChild(tabName);
         tab.dataset.selected = 'false';
     
         switch (type) {
             case 'task':
-                taskList.appendChild(tab);
+                taskList.container.appendChild(tab);
                 break;
             case 'project':
-                projectList.appendChild(tab);
+                projectList.container.appendChild(tab);
                 break;
             default:
                 throw 'Tab is not of type Task of Project'
@@ -113,11 +120,11 @@ const NavBar = () => {
     };
 }
 
-export const navbar = NavBar()
+export const navbar = createNavBar()
 
-navbar.createTab('task', 'Todos', '/#', allTasks);
-navbar.createTab('task', 'Hoy', '/#', todayTasks);
-navbar.createTab('task', 'Semana', '/#', weekTasks);
-navbar.createTab('task', 'Importantes', '/#', importantTasks);
-navbar.createTab('project', 'School', '/#', projectIcon);
-navbar.createTab('project', 'Personal', '/#', projectIcon);
+navbar.createTab('task', 'Todos', '/', allTasks);
+navbar.createTab('task', 'Hoy', '/', todayTasks);
+navbar.createTab('task', 'Semana', '/', weekTasks);
+navbar.createTab('task', 'Importantes', '/', importantTasks);
+navbar.createTab('project', 'School', '/', projectIcon);
+navbar.createTab('project', 'Personal', '/', projectIcon);

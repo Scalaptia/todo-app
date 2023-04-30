@@ -10,7 +10,6 @@ export interface Project {
 export const createProject = (title: string) => {
     const todoList: Todo[] = [];
 
-
     function addTodo(todo: Todo) {
         if (todo.title.length > 0) {
             todoList.unshift(todo);
