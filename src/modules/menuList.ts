@@ -1,6 +1,7 @@
 import navbar from "../ui/navbar";
 
 export interface MenuItem {
+    type: string;
     id: number;
     title: string;
 }
@@ -23,7 +24,6 @@ export default (() => {
             navbar.createTab('menu', title, icon, menuIDs);
             items.push(createItem(title, menuIDs));
             menuIDs++;
-            console.log(items)
         } else {
             throw 'Menu item title must contain at least 1 charater';
         }

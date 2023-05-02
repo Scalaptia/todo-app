@@ -1,6 +1,7 @@
 import { Todo } from "./todoFactory";
 
 export interface Project {
+    type: string,
     id: number;
     title: string;
     todoList: Todo[];
@@ -14,7 +15,7 @@ export const createProject = (title: string, id: number) => {
 
     function addTodo(todo: Todo) {
         if (todo.title.length > 0) {
-            todoList.unshift(todo);
+            todoList.push(todo);
         } else {
             throw 'Todo title must contain at least 1 charater';
         }

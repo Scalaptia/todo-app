@@ -61,8 +61,8 @@ export default (() => {
             sidebar.appendChild(menuList.container);
             sidebar.appendChild(projectList.container);
 
-        container.appendChild(NavHeader());
-        container.appendChild(sidebar);
+    container.appendChild(NavHeader());
+    container.appendChild(sidebar);
 
     const createTab = (type: string, name: string, svg: string, id: number) => {
         const tab = createElement('div', 'tab');
@@ -107,17 +107,16 @@ export default (() => {
                 const item: any = projectElements![i];
                 item.dataset.selected = 'false';
             }
-        
-            tab.dataset.selected = 'true';
-            activeTab = tab;
-            display.updateHeader(activeTab);
 
-            if (type === 'menu') {
-                display.pageLoad(menuArray.items[id]);
-            }
-
-            if (type === 'project') {
-                display.pageLoad(projectArray.projects[id]);
+            switch (type) {
+                case 'menu':
+                    const targetItem = menuArray.items.filter(obj => obj.id === id);
+                    display.displayTasks(targetItem[0]);
+                    break;
+                case 'project':
+                    const targetProject = projectArray.projects.filter(obj => obj.id === id);
+                    display.displayTasks(targetProject[0]);
+                    break;
             }
         });
 
@@ -150,7 +149,6 @@ export default (() => {
                 break;
         }
     }
-
 
     return {
         container,

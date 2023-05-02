@@ -4,7 +4,7 @@ import navbar from "../ui/navbar";
 
 export default (() => {
     const projects: Project[] = [];
-    let projectIDs = 0;
+    let projectIDs = 1;
 
     function addProject(title: string) {
         if (title.length > 0) {
