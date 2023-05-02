@@ -1,6 +1,6 @@
 import '../styles/navbar.css';
 import { createElement } from './pageUI';
-import pageLoad from './pageLoad';
+import pageLoad from './pageLoad'; 
 import logoSVG from '../assets/logo.svg';
 import addSVG from '../assets/add.svg';
 import deleteSVG from '../assets/delete.svg'
@@ -10,6 +10,7 @@ import weekTasks from '../assets/week.svg';
 import importantTasks from '../assets/important.svg'
 import Modal from './modal';
 import projectArray from '../modules/projectList';
+import display from './display';
 
 const NavHeader = () => {
     const navHeader = createElement('div', 'nav-header');
@@ -64,7 +65,8 @@ const ProjectList = () => {
 const projectList = ProjectList()
 
 
-const createNavBar = () => {
+export default (() => {
+    let activeTab = undefined
     const container = createElement('div', 'navbar');
         const sidebar = createElement('div', 'sidebar');
             sidebar.appendChild(menuList.container);
@@ -114,10 +116,12 @@ const createNavBar = () => {
     
             for (let i = 0; i < projectElements!.length; i++) {
                 const item: any = projectElements![i];
-                item.dataset.selected = 'false'
+                item.dataset.selected = 'false';
             }
         
-            tab.dataset.selected = 'true'
+            tab.dataset.selected = 'true';
+            activeTab = tab;
+            display.updateHeader(activeTab);
             pageLoad(page);
         });
 
@@ -149,16 +153,15 @@ const createNavBar = () => {
         }
     }
 
+    createTab('menu', 'Todos', '/', allTasks, 0);
+    createTab('menu', 'Hoy', '/', todayTasks, 0);
+    createTab('menu', 'Semana', '/', weekTasks, 0);
+    createTab('menu', 'Importantes', '/', importantTasks, 0);
+
     return {
         container,
         createTab,
         removeTab,
+        activeTab,
     };
-}
-
-export const navbar = createNavBar()
-
-navbar.createTab('menu', 'Todos', '/', allTasks, 0);
-navbar.createTab('menu', 'Hoy', '/', todayTasks, 0);
-navbar.createTab('menu', 'Semana', '/', weekTasks, 0);
-navbar.createTab('menu', 'Importantes', '/', importantTasks, 0);
+})()

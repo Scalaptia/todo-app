@@ -1,6 +1,6 @@
 import { Project, createProject } from "./projectFactory";
 import projectIcon from '../assets/menu.svg'
-import { navbar } from "../ui/navbar";
+import navbar from "../ui/navbar";
 
 export default (() => {
     const projects: Project[] = [];

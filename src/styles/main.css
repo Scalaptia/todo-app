@@ -18,6 +18,8 @@ body {
 #app {
     position: absolute;
     background-color: var(--background);
+    display: grid;
+    grid-template-columns: 16rem calc(100vw - 16rem);
 }
 
 img {
