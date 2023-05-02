@@ -2,6 +2,11 @@ import '../styles/main.css'
 import navbar from './navbar';
 import Modal from './modal';
 import display from './display';
+import menuList from '../modules/menuList';
+import allTasks from '../assets/inbox.svg';
+import todayTasks from '../assets/today.svg';
+import weekTasks from '../assets/week.svg';
+import importantTasks from '../assets/important.svg'
 
 export const app = document.querySelector<HTMLDivElement>('#app');
 
@@ -15,5 +20,9 @@ export default function generatePage() {
         app!.appendChild(Modal.modal);
         app!.appendChild(navbar.container);
         app!.appendChild(display.container);
-        Modal.projectModal()
+
+        menuList.addItem('Todos', allTasks);
+        menuList.addItem('Hoy', todayTasks);
+        menuList.addItem('Semana', weekTasks);
+        menuList.addItem('Importantes', importantTasks);
 }

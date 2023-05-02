@@ -1,14 +1,15 @@
 import { Todo } from "./todoFactory";
 
 export interface Project {
-    projectID: number;
+    id: number;
     title: string;
     todoList: Todo[];
     addTodo: (todo: Todo) => void;
     removeTodo: (todo: Todo) => void;
 }
 
-export const createProject = (title: string, projectID: number) => {
+export const createProject = (title: string, id: number) => {
+    const type = 'project'
     const todoList: Todo[] = [];
 
     function addTodo(todo: Todo) {
@@ -29,8 +30,9 @@ export const createProject = (title: string, projectID: number) => {
     }
 
     return {
+        type,
         title,
-        projectID,
+        id,
         todoList,
         addTodo,
         removeTodo

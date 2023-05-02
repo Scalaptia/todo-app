@@ -31,7 +31,6 @@
 }
 
 /* Sidebar */
-
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -60,7 +59,6 @@
     transition: all 0.1s ease-in-out;
 }
 
-
 .tab[data-selected = 'true'] {
     outline: 1px solid var(--text-color);
     color: var(--text-selected);
@@ -82,12 +80,12 @@
     transition: all 0.1s ease-in-out;
 }
 
-/* Add Project section*/
-.projects {
-    display: flex;
-    flex-direction: column;
+/* Menu List */
+.menu-list {
+    margin-top: 1px;
 }
 
+/* Add Project section*/
 .add-section {
     color:  var(--text-selected);
     display: flex;

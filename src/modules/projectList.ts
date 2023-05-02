@@ -4,11 +4,11 @@ import navbar from "../ui/navbar";
 
 export default (() => {
     const projects: Project[] = [];
-    let projectIDs = 1;
+    let projectIDs = 0;
 
     function addProject(title: string) {
         if (title.length > 0) {
-            navbar.createTab('project', title, '/', projectIcon, projectIDs);
+            navbar.createTab('project', title, projectIcon, projectIDs);
             projects.unshift(createProject(title, projectIDs));
             projectIDs++;
             console.log(projects)
@@ -19,7 +19,7 @@ export default (() => {
 
     function removeProject(project: Project) {
         if (projects.includes(project)) {
-            navbar.removeTab('project', project.projectID)
+            navbar.removeTab('project', project.id)
             const index = projects.indexOf(project);
             projects.splice(index, 1);
             console.log(projects)

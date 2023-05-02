@@ -1,15 +1,11 @@
 import '../styles/navbar.css';
 import { createElement } from './pageUI';
-import pageLoad from './pageLoad'; 
 import logoSVG from '../assets/logo.svg';
 import addSVG from '../assets/add.svg';
 import deleteSVG from '../assets/delete.svg'
-import allTasks from '../assets/inbox.svg';
-import todayTasks from '../assets/today.svg';
-import weekTasks from '../assets/week.svg';
-import importantTasks from '../assets/important.svg'
 import Modal from './modal';
 import projectArray from '../modules/projectList';
+import menuArray from '../modules/menuList'
 import display from './display';
 
 const NavHeader = () => {
@@ -32,17 +28,14 @@ const NavHeader = () => {
 
 const MenuList = () => {
     const container = createElement('div', 'menu-list')
-        const ul = createElement('ul', 'menu-items');
-        container.appendChild(ul);
     return {
-        container
+        container,
     }
 }
 const menuList = MenuList()
 
 const ProjectList = () => {
     const container = createElement('div', 'project-list');
-
         const titleSection = createElement('div', 'add-section');
             const addBtnTitle = createElement('h3', 'add-btn-title');
             addBtnTitle.innerText = 'Materias'
@@ -54,10 +47,6 @@ const ProjectList = () => {
             addBtn.addEventListener('click', () => {Modal.projectModal()});
             titleSection.appendChild(addBtn);
         container.appendChild(titleSection)
-
-        const ul = createElement('ul', 'projects');
-        container.appendChild(ul);
-        
     return {
         container
     }
@@ -75,7 +64,7 @@ export default (() => {
         container.appendChild(NavHeader());
         container.appendChild(sidebar);
 
-    const createTab = (type: string, name: string, page: any, svg: string, id: number) => {
+    const createTab = (type: string, name: string, svg: string, id: number) => {
         const tab = createElement('div', 'tab');
 
             const nameContainer = createElement('div', 'tab-name-container');
@@ -94,7 +83,7 @@ export default (() => {
                 tabDelete.src = deleteSVG;
 
                 tabDelete.addEventListener('click', () => {
-                    const targetProject = projectArray.projects.filter(obj => obj.projectID === id);
+                    const targetProject = projectArray.projects.filter(obj => obj.id === id);
                     projectArray.removeProject(targetProject[0])
                 });
             buttonsContainer.appendChild(tabDelete);
@@ -122,13 +111,21 @@ export default (() => {
             tab.dataset.selected = 'true';
             activeTab = tab;
             display.updateHeader(activeTab);
-            pageLoad(page);
+
+            if (type === 'menu') {
+                display.pageLoad(menuArray.items[id]);
+            }
+
+            if (type === 'project') {
+                display.pageLoad(projectArray.projects[id]);
+            }
         });
 
         tab.dataset.selected = 'false';
     
         switch (type) {
             case 'menu':
+                tab.dataset.menuid = `${id}`
                 menuList.container.appendChild(tab);
                 break;
             case 'project':
@@ -143,6 +140,7 @@ export default (() => {
     const removeTab = (type: string, id: number) => {
         switch (type) {
             case 'menu':
+                throw 'Cannot remove menu item'
                 break;
             case 'project':
                 const targetProject = projectList.container.querySelector(`[data-projectid="${id}"]`)
@@ -153,10 +151,6 @@ export default (() => {
         }
     }
 
-    createTab('menu', 'Todos', '/', allTasks, 0);
-    createTab('menu', 'Hoy', '/', todayTasks, 0);
-    createTab('menu', 'Semana', '/', weekTasks, 0);
-    createTab('menu', 'Importantes', '/', importantTasks, 0);
 
     return {
         container,

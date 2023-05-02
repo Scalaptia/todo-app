@@ -1,5 +1,8 @@
 import { createElement } from "./pageUI"
 import '../styles/display.css'
+import { Project } from "../modules/projectFactory";
+import { MenuItem } from "../modules/menuList";
+// import { app } from "./pageUI";
 
 export default (() => {
     const container = createElement('div', 'display');
@@ -13,8 +16,17 @@ export default (() => {
         headerTab.innerHTML = `${tab.children[0].innerHTML}`
     }
 
+    function pageLoad(tab: (Project | MenuItem)) {
+
+        console.log(tab)
+        // window.scrollTo(0,0)
+        // app!.removeChild(app!.childNodes[1]!);
+        // app!.insertBefore(newTab, app!.children[1]);
+    }
+
     return {
         container,
-        updateHeader
+        updateHeader,
+        pageLoad
     }
 })()
