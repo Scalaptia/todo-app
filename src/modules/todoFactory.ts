@@ -12,7 +12,6 @@ export interface Todo {
 }
 
 export const createTodo = (title: string, description: string, dueDate: Date, priority: TodoPriority) => {
-
     return {
         title,
         description,

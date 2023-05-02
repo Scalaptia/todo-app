@@ -8,7 +8,7 @@ import todayTasks from '../assets/today.svg';
 import weekTasks from '../assets/week.svg';
 import importantTasks from '../assets/important.svg'
 import projectIcon from '../assets/menu.svg'
-import { modal } from './modal';
+import Modal from './modal';
 
 const NavHeader = () => {
     const navHeader = createElement('div', 'nav-header');
@@ -48,7 +48,7 @@ const ProjectList = () => {
             const addBtn = document.createElement('img');
             addBtn.classList.add('add-btn', 'svg');
             addBtn.src = addSVG
-            addBtn.addEventListener('click', () => {modal.projectModal()});
+            addBtn.addEventListener('click', () => {Modal.projectModal()});
             titleSection.appendChild(addBtn);
         container.appendChild(titleSection)
 

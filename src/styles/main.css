@@ -19,3 +19,9 @@ body {
     position: absolute;
     background-color: var(--background);
 }
+
+img {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}

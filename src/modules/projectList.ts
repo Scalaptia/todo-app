@@ -1,6 +1,6 @@
 import { Project, createProject } from "./projectFactory";
 
-export default function projectList() {
+export default (() => {
     const projects = [
         createProject('Default'),
         createProject('Second Project')
@@ -24,7 +24,8 @@ export default function projectList() {
     }
 
     return {
+        projects,
         addProject,
         removeProject,
     }
-}
+})();
