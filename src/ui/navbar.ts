@@ -29,15 +29,15 @@ const NavHeader = () => {
     return navHeader
 }
 
-const TaskList = () => {
-    const container = createElement('div', 'task-list')
-        const ul = createElement('ul', 'tasks');
+const MenuList = () => {
+    const container = createElement('div', 'menu-list')
+        const ul = createElement('ul', 'menu-items');
         container.appendChild(ul);
     return {
         container
     }
 }
-const taskList = TaskList()
+const menuList = MenuList()
 
 const ProjectList = () => {
     const container = createElement('div', 'project-list');
@@ -67,7 +67,7 @@ const projectList = ProjectList()
 const createNavBar = () => {
     const container = createElement('div', 'navbar');
         const sidebar = createElement('div', 'sidebar');
-            sidebar.appendChild(taskList.container);
+            sidebar.appendChild(menuList.container);
             sidebar.appendChild(projectList.container);
 
         container.appendChild(NavHeader());
@@ -104,11 +104,11 @@ const createNavBar = () => {
         }
             
         tab.addEventListener('click', () => {
-            const taskElements = taskList.container?.children;
+            const menuElements = menuList.container?.children;
             const projectElements = projectList.container?.children;
     
-            for (let i = 0; i < taskElements!.length; i++) {
-                const item: any = taskElements![i];
+            for (let i = 0; i < menuElements!.length; i++) {
+                const item: any = menuElements![i];
                 item.dataset.selected = 'false'
             }
     
@@ -124,8 +124,8 @@ const createNavBar = () => {
         tab.dataset.selected = 'false';
     
         switch (type) {
-            case 'task':
-                taskList.container.insertBefore(tab, taskList.container.firstChild);
+            case 'menu':
+                menuList.container.appendChild(tab);
                 break;
             case 'project':
                 tab.dataset.projectid = `${id}`
@@ -138,13 +138,11 @@ const createNavBar = () => {
 
     const removeTab = (type: string, id: number) => {
         switch (type) {
-            case 'task':
-                // taskList.container.removeChild();
+            case 'menu':
                 break;
             case 'project':
                 const targetProject = projectList.container.querySelector(`[data-projectid="${id}"]`)
                 projectList.container.removeChild(targetProject!);
-
                 break;
             default:
                 break;
@@ -160,7 +158,7 @@ const createNavBar = () => {
 
 export const navbar = createNavBar()
 
-navbar.createTab('task', 'Todos', '/', allTasks, 0);
-navbar.createTab('task', 'Hoy', '/', todayTasks, 0);
-navbar.createTab('task', 'Semana', '/', weekTasks, 0);
-navbar.createTab('task', 'Importantes', '/', importantTasks, 0);
+navbar.createTab('menu', 'Todos', '/', allTasks, 0);
+navbar.createTab('menu', 'Hoy', '/', todayTasks, 0);
+navbar.createTab('menu', 'Semana', '/', weekTasks, 0);
+navbar.createTab('menu', 'Importantes', '/', importantTasks, 0);

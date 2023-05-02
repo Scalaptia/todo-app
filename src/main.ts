@@ -3,7 +3,8 @@ import './styles/main.css';
 import generatePage from './ui/pageUI';
 
 
-console.log(projectList.projects);
-projectList.addProject('Default');
-
 generatePage();
+
+projectList.addProject('Default');
+const defaultON = document.querySelector(`[data-projectid="1"]`) as HTMLElement
+defaultON.dataset.selected = 'true'
