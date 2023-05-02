@@ -18,6 +18,7 @@ export default (() => {
             modalTitle.innerText = 'Añadir Tarea';
 
             const formContainer = createElement('div', 'form-container');
+                formContainer.dataset.type = 'task';
                 formContainer.appendChild(Form.Title);
                 formContainer.appendChild(Form.Buttons);
 
@@ -36,6 +37,7 @@ export default (() => {
             modalTitle.innerText = 'Añadir Materia';
 
             const formContainer = createElement('div', 'form-container');
+                formContainer.dataset.type = 'project';
                 formContainer.appendChild(Form.Title);
                 formContainer.appendChild(Form.Buttons);
 

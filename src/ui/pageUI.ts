@@ -1,5 +1,4 @@
 import '../styles/main.css'
-import LightMode from '../assets/light-mode.svg'
 import { navbar } from './navbar';
 import Modal from './modal';
 
@@ -15,6 +14,4 @@ export default function generatePage() {
         app!.appendChild(Modal.modal);
         Modal.projectModal()
         app!.appendChild(navbar.container);
-        navbar.createTab('project', 'test', '/', LightMode);
-
 }

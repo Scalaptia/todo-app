@@ -4,4 +4,6 @@ import generatePage from './ui/pageUI';
 
 
 console.log(projectList.projects);
+projectList.addProject('Default');
+
 generatePage();

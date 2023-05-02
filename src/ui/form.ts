@@ -1,4 +1,4 @@
-import { createProject } from "../modules/projectFactory";
+import projectList from "../modules/projectList";
 import Modal from "./modal";
 import { createElement } from "./pageUI";
 
@@ -24,9 +24,22 @@ export default (() => {
     const Submit = document.createElement('button');
         Submit.classList.add('form-submit-btn');
         Submit.innerText = 'Añadir';
-        Submit.addEventListener('click', () => {
-            createProject(titleInput.value);
-            Modal.toggleModal()
+        Submit.addEventListener('click', (event) => {
+            const parent = ((event.target as HTMLElement).parentNode as HTMLElement).parentNode as HTMLElement;
+            console.log(parent.dataset.type)
+                switch (parent.dataset.type) {
+                    case 'project':
+                        projectList.addProject(titleInput.value);
+                        break;
+                    case 'task':
+                        console.log('submit task')
+                        break;
+                    default:
+                        break;
+                }
+
+                titleInput.value = '';
+                Modal.toggleModal()
         });
 
     const Cancel = document.createElement('button');
@@ -40,6 +53,7 @@ export default (() => {
     
     return {
         modalForm,
+        Submit,
         Title,
         Buttons,
     }

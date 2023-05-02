@@ -49,26 +49,37 @@
 
 .tab {
     font-size: 16px;
-    width: 100%;
+    width: calc(100% - 25px);
     list-style: none;
     cursor: pointer;
     color: var(--text-color);
     padding: 10px;
     padding-left: 15px;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
     transition: all 0.1s ease-in-out;
 }
 
-.tab:hover, .tab[data-selected = 'true'] {
+
+.tab[data-selected = 'true'] {
     outline: 1px solid var(--text-color);
     color: var(--text-selected);
-    background-color: var(--background-hover);;
+    background-color: var(--background-hover);
 }
 
-.tab-image {
+.tab:hover {
+    background-color: var(--front-secondary);
+}
+
+.tab-name-container, .tab-buttons-container {
+    display: flex;
+    gap: 10px
+}
+
+.tab-image, .tab-delete {
     filter: invert(90%);
     width: 20px;
+    transition: all 0.1s ease-in-out;
 }
 
 /* Add Project section*/
@@ -97,6 +108,6 @@
     transition: all 0.1s ease-in-out;
 }
 
-.add-btn:hover {
+.btn:hover {
     filter: invert(50%);
 }

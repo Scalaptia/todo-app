@@ -1,14 +1,17 @@
 import { Project, createProject } from "./projectFactory";
+import projectIcon from '../assets/menu.svg'
+import { navbar } from "../ui/navbar";
 
 export default (() => {
-    const projects = [
-        createProject('Default'),
-        createProject('Second Project')
-    ];
+    const projects: Project[] = [];
+    let projectIDs = 1;
 
-    function addProject(project: Project) {
-        if (project.title.length > 0) {
-            projects.unshift(project);
+    function addProject(title: string) {
+        if (title.length > 0) {
+            navbar.createTab('project', title, '/', projectIcon, projectIDs);
+            projects.unshift(createProject(title, projectIDs));
+            projectIDs++;
+            console.log(projects)
         } else {
             throw 'Project title must contain at least 1 charater';
         }
@@ -16,8 +19,10 @@ export default (() => {
 
     function removeProject(project: Project) {
         if (projects.includes(project)) {
+            navbar.removeTab('project', project.projectID)
             const index = projects.indexOf(project);
             projects.splice(index, 1);
+            console.log(projects)
         } else {
             throw 'Project does not exist within the projects array';
         }
