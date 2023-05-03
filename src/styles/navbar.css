@@ -86,7 +86,7 @@
 }
 
 /* Add Project section*/
-.add-section {
+.add-project-section {
     color:  var(--text-selected);
     display: flex;
     align-items: center;

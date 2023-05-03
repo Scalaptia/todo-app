@@ -1,25 +1,25 @@
 .display {
     grid-column: 2;
-    background-color: var(--front-color);
-    height: 4rem;
+    background-color: var(--background-color);
+    height: 100%;
     gap: 20px;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    box-shadow: 0px 2px 0px 0px var(--text-selected);
 }
 
 .display-header {
     display: flex;
+    height: 4rem;
+    width: 100%;
+    background-color: var(--front-color);
     font-size: 20px;
     font-weight: 600;
-    width: calc(100% - 25px);
     list-style: none;
     color: var(--text-color);
-    padding: 10px;
-    padding-top: 20px;
+    margin-bottom: 10px;
     gap: 10px;
+    align-items: center;
     justify-content: center;
     display: flex;
+    box-shadow: 0px 2px 0px 0px var(--text-selected);
     transition: all 0.1s ease-in-out;
 }
 
@@ -28,5 +28,51 @@
 }
 
 .display-header > .tab-name {
+    margin-bottom: 2px;
     color: var(--text-selected);
+}
+
+/* Tasks */
+
+.display-tasks {
+    background-color: var(--front-color);
+    border-radius: 10px;
+    margin: 4rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    height: calc(100% - 10rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.task-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-task-section {
+    color:  var(--text-selected);
+    background-color: var(--front-secondary);
+    padding: 10px;
+    padding-left: 20px;
+    height: 2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    outline: 1px solid var(--text-selected);
+    transition: all 0.1s ease-in-out;
+}
+
+.add-task-section:hover {
+    cursor: pointer;
+    background-color: var(--background-hover);
+}
+
+.add-task-section > .add-btn {
+    padding-right: 10px;
+    width: 20px;
+    filter: invert(90%);
+    transition: all 0.1s ease-in-out;
 }

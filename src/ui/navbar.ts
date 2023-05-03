@@ -36,7 +36,7 @@ const menuList = MenuList()
 
 const ProjectList = () => {
     const container = createElement('div', 'project-list');
-        const titleSection = createElement('div', 'add-section');
+        const titleSection = createElement('div', 'add-project-section');
             const addBtnTitle = createElement('h3', 'add-btn-title');
             addBtnTitle.innerText = 'Materias'
             titleSection.appendChild(addBtnTitle);
@@ -55,7 +55,6 @@ const projectList = ProjectList()
 
 
 export default (() => {
-    let activeTab = undefined
     const container = createElement('div', 'navbar');
         const sidebar = createElement('div', 'sidebar');
             sidebar.appendChild(menuList.container);
@@ -118,6 +117,8 @@ export default (() => {
                     display.displayTasks(targetProject[0]);
                     break;
             }
+
+            tab.dataset.selected = 'true';
         });
 
         tab.dataset.selected = 'false';
@@ -140,7 +141,6 @@ export default (() => {
         switch (type) {
             case 'menu':
                 throw 'Cannot remove menu item'
-                break;
             case 'project':
                 const targetProject = projectList.container.querySelector(`[data-projectid="${id}"]`)
                 projectList.container.removeChild(targetProject!);
@@ -154,6 +154,5 @@ export default (() => {
         container,
         createTab,
         removeTab,
-        activeTab,
     };
 })()

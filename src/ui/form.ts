@@ -32,7 +32,10 @@ export default (() => {
                         projectList.addProject(titleInput.value);
                         break;
                     case 'task':
-                        console.log('submit task')
+                        const projects = document.querySelector('.project-list');
+                        const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
+                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!))
+                        console.log(targetProjectObject);
                         break;
                     default:
                         break;
