@@ -1,4 +1,5 @@
 import projectList from "../modules/projectList";
+import { createTodo } from "../modules/todoFactory";
 import Modal from "./modal";
 import { createElement } from "./pageUI";
 
@@ -35,7 +36,8 @@ export default (() => {
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
                         const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!))
-                        console.log(targetProjectObject);
+                        console.log(targetProjectObject[0]);
+                        targetProjectObject[0].addTodo(createTodo(titleInput.value))
                         break;
                     default:
                         break;

@@ -79,10 +79,10 @@ export default (() => {
 
     container.appendChild(displayHeader.header);
     container.appendChild(displayMain);
-    displayMain.appendChild(tasksSection)
-
+    displayMain.appendChild(tasksSection);
 
     function displayTasks(tab: (Project | MenuItem)) {
+        tasksSection.innerHTML = ''
         if (tab === undefined) {
             displayHeader.updateHeader('Select Tab')
         }
@@ -107,7 +107,8 @@ export default (() => {
         
         if (isProject(tab)) {
             tab.todoList.forEach(todo => {
-                createTaskEl(todo)
+                console.log(todo)
+                tasksSection.appendChild(createTaskEl(todo))
             })
         }
     }
