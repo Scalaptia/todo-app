@@ -15,9 +15,9 @@ export const createProject = (title: string, id: number) => {
     const todoList: Todo[] = [];
     let taskIDs = 0
 
-    function addTodo(taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean) {
+    function addTodo(taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
         if (taskTitle.length > 0) {
-            todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs));
+            todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
             taskIDs++
         } else {
             throw 'Todo title must contain at least 1 charater';

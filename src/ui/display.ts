@@ -41,10 +41,16 @@ const createTaskEl = (todo: Todo, tab: Project) => {
         const leftContainer = createElement('div', 'task-left');
             const taskStatus = createElement('div', 'task-status');
             container.dataset.status = 'not done';
-
+            (todo.status) ? (container.dataset.status = 'done') : (container.dataset.status = 'not done');
             taskStatus.addEventListener('click', () => {
-                (container.dataset.status === 'not done') ? (container.dataset.status = 'done') : (container.dataset.status = 'not done')
-            })
+                todo.status = !todo.status;
+                (todo.status) ? (container.dataset.status = 'done') : (container.dataset.status = 'not done');
+                if (todo.status) {
+                    const task = tab.todoList.splice(todo.id, 1)[0];
+                    tab.todoList.push(task);
+                }
+            });
+
             leftContainer.appendChild(taskStatus);
 
             const taskTitle = createElement('div', 'task-title');
@@ -72,7 +78,7 @@ const createTaskEl = (todo: Todo, tab: Project) => {
 
             const taskPriority = document.createElement('img');
             taskPriority.classList.add('btn', 'task-priority');
-            
+
             todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
             taskPriority.addEventListener('click', () => {
                 todo.priority = !todo.priority

@@ -121,7 +121,7 @@ export default (() => {
                         const targetTaskObject =  targetProjectObject[0].todoList.filter(obj => obj.id === parseInt(targetTaskElement.dataset.taskid!));
                         const taskid = targetTaskObject[0].id
 
-                        targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, taskid)) // Replace Todo with NEW Todo
+                        targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, taskid, false)) // Replace Todo with NEW Todo
                         display.displayTasks(targetProjectObject[0])
                         break;
                     default:
