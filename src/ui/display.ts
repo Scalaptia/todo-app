@@ -15,7 +15,6 @@ function isProject(obj: any): obj is Project {
     return Array.isArray(obj.todoList);
 }
 
-
 const displayHeader = (() => {
     const header = createElement('div', 'display-header');
         const headerTab = createElement('div', 'header-tab');
@@ -50,17 +49,18 @@ const createTaskEl = (todo: Todo, tab: Project) => {
                     tab.todoList.push(task);
                 }
             });
-
             leftContainer.appendChild(taskStatus);
 
             const taskTitle = createElement('div', 'task-title');
             taskTitle.innerText = todo.title;
             leftContainer.appendChild(taskTitle);
 
-        const rightContainer = createElement('div', 'task-right');
+        
+            const rightContainer = createElement('div', 'task-right');
             const taskDate = createElement('div', 'task-date');
-            todo.dueDate ? taskDate.innerText = format(todo.dueDate, 'MM/dd/yyyy') : '';
-
+            if (todo.dueDate) {taskDate.innerText = format(todo.dueDate, 'dd/MM/yyyy')};
+            rightContainer.appendChild(taskDate);
+        
             const taskEdit = document.createElement('img');
             taskEdit.classList.add('btn', 'task-edit');
             taskEdit.src = editSVG;
@@ -68,6 +68,7 @@ const createTaskEl = (todo: Todo, tab: Project) => {
                 container.dataset.editing = 'true';
                 modal.editTaskModal(todo);
             });
+            rightContainer.appendChild(taskEdit);
 
             const taskDelete = document.createElement('img');
             taskDelete.classList.add('btn', 'task-delete');
@@ -75,21 +76,17 @@ const createTaskEl = (todo: Todo, tab: Project) => {
             taskDelete.addEventListener('click', () => {
                 tab.removeTodo(todo);
             });
+            rightContainer.appendChild(taskDelete);
 
             const taskPriority = document.createElement('img');
             taskPriority.classList.add('btn', 'task-priority');
-
             todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
             taskPriority.addEventListener('click', () => {
                 todo.priority = !todo.priority
                 todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
             })
-
-        rightContainer.appendChild(taskDate);
-        rightContainer.appendChild(taskEdit);
-        rightContainer.appendChild(taskDelete);
-        rightContainer.appendChild(taskPriority);
-
+            rightContainer.appendChild(taskPriority);
+    
     container.appendChild(leftContainer);
     container.appendChild(rightContainer);
     container.dataset.taskid = `${todo.id}`
@@ -130,6 +127,7 @@ export default (() => {
 
     function displayTasks(tab: (Project | MenuItem)) {
         tasksSection.innerHTML = ''
+
         if (tab === undefined) {
             displayHeader.updateHeader('Select Tab')
         }
@@ -154,7 +152,6 @@ export default (() => {
         
         if (isProject(tab)) {
             tab.todoList.forEach(todo => {
-                console.log(todo)
                 tasksSection.appendChild(createTaskEl(todo, tab))
             })
         }

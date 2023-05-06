@@ -3,10 +3,10 @@ import { Todo, createTodo } from "./todoFactory";
 
 export interface Project {
     type: string,
-    id: number;
     title: string;
+    id: number;
     todoList: Todo[];
-    addTodo: (taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean) => void;
+    addTodo: (taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) => void;
     removeTodo: (todo: Todo) => void;
 }
 

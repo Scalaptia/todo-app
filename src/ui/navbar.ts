@@ -7,6 +7,7 @@ import Modal from './modal';
 import projectArray from '../modules/projectList';
 import menuArray from '../modules/menuList'
 import display from './display';
+import menuTasks from '../modules/menuTasks';
 
 const NavHeader = () => {
     const navHeader = createElement('div', 'nav-header');
@@ -110,6 +111,7 @@ export default (() => {
             switch (type) {
                 case 'menu':
                     const targetItem = menuArray.items.filter(obj => obj.id === id);
+                    menuTasks(targetItem[0]);
                     display.displayTasks(targetItem[0]);
                     break;
                 case 'project':

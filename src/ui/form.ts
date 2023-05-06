@@ -83,7 +83,7 @@ export default (() => {
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
                         const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
-                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!);
+                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, false);
                         display.displayTasks(targetProjectObject[0])
                         break;
                     default:
