@@ -49,6 +49,7 @@
 .task-section {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .add-task-section {
@@ -85,7 +86,37 @@
     height: 2rem;
     border-radius: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     outline: 1px solid var(--text-selected);
     transition: all 0.1s ease-in-out;
+}
+
+.task-left, .task-right {
+    display: flex;
+    gap: 10px;
+}
+
+.task-status {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid var(--text-selected);
+    transition: all 0.1s ease-in-out;
+}
+
+.task[data-status = "done"] {
+    opacity: 50%;
+}
+
+.task[data-status = "done"] .task-status {
+    background-image: url(../assets/check.svg);
+    background-color: var(--green);
+}
+
+.task .btn {
+    filter: invert(70%);
+    padding: 2px;
+    height: 15px;
+    width: 15px;
 }

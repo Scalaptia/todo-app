@@ -4,7 +4,11 @@ import { Project } from "../modules/projectFactory";
 import { MenuItem } from "../modules/menuList";
 import { Todo } from "../modules/todoFactory";
 import modal from "./modal";
+import { format } from "date-fns";
 import addSVG from '../assets/add.svg'
+import editSVG from '../assets/edit.svg'
+import deleteSVG from '../assets/delete.svg'
+import importantSVG from '../assets/important.svg'
 
 function isProject(obj: any): obj is Project {
     return Array.isArray(obj.todoList);
@@ -34,18 +38,41 @@ const displayHeader = (() => {
 const createTaskEl = (todo: Todo) => {
     const container = createElement('div', 'task');
         const leftContainer = createElement('div', 'task-left');
+            const taskStatus = createElement('div', 'task-status');
+            container.dataset.status = 'not done';
+
+            taskStatus.addEventListener('click', () => {
+                (container.dataset.status === 'not done') ? (container.dataset.status = 'done') : (container.dataset.status = 'not done')
+            })
+            leftContainer.appendChild(taskStatus);
+
             const taskTitle = createElement('div', 'task-title');
             taskTitle.innerText = todo.title;
-        leftContainer.appendChild(taskTitle);
+            leftContainer.appendChild(taskTitle);
 
         const rightContainer = createElement('div', 'task-right');
-            const taskDate = createElement('div', 'task-date')
+            const taskDate = createElement('div', 'task-date');
+            todo.dueDate ? taskDate.innerText = format(todo.dueDate, 'MM/dd/yyyy') : '';
 
-            const taskPriority = createElement('div', 'task-priority');
+            const taskEdit = document.createElement('img');
+            taskEdit.classList.add('btn', 'task-edit');
+            taskEdit.src = editSVG;
+
+            const taskDelete = document.createElement('img');
+            taskDelete.classList.add('btn', 'task-delete');
+            taskDelete.src = deleteSVG;
+
+            const taskPriority = document.createElement('img');
+            taskPriority.classList.add('btn', 'task-priority');
+            taskPriority.src = importantSVG;
 
         rightContainer.appendChild(taskDate);
+        rightContainer.appendChild(taskEdit);
+        rightContainer.appendChild(taskDelete);
         rightContainer.appendChild(taskPriority);
 
+    container.appendChild(leftContainer);
+    container.appendChild(rightContainer);
     return container
 }
 

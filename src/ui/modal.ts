@@ -20,7 +20,11 @@ export default (() => {
             const formContainer = createElement('div', 'form-container');
                 formContainer.dataset.type = 'task';
                 formContainer.appendChild(Form.Title);
+                formContainer.appendChild(Form.Description);
+                formContainer.appendChild(Form.DueDate);
+                formContainer.appendChild(Form.Priority);
                 formContainer.appendChild(Form.Buttons);
+
 
 
         container.appendChild(modalTitle);

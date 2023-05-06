@@ -1,5 +1,6 @@
 import projectList from "../modules/projectList";
 import { createTodo } from "../modules/todoFactory";
+import display from "./display";
 import Modal from "./modal";
 import { createElement } from "./pageUI";
 
@@ -22,12 +23,50 @@ export default (() => {
         titleInput.type = 'text';
         Title.appendChild(titleInput);
 
+    const Description = createElement('div', 'input-container');
+        const descriptionLabel = document.createElement('label');
+        descriptionLabel.classList.add('decription-label');
+        descriptionLabel.htmlFor = 'description-input';
+        descriptionLabel.innerText = 'Descripción';
+        Description.appendChild(descriptionLabel);
+
+        const descriptionInput = document.createElement('input');
+        descriptionInput.name = 'description-input';
+        descriptionInput.id = 'description-input';
+        descriptionInput.type = 'text';
+        Description.appendChild(descriptionInput);
+
+    const DueDate = createElement('div', 'input-container');
+        const dateLabel = document.createElement('label');
+        dateLabel.classList.add('date-label');
+        dateLabel.htmlFor = 'date-input';
+        dateLabel.innerText = 'Fecha';
+        DueDate.appendChild(dateLabel);
+
+        const dateInput = document.createElement('input');
+        dateInput.name = 'date-input';
+        dateInput.id = 'date-input';
+        dateInput.type = 'date';
+        DueDate.appendChild(dateInput);
+        
+    const Priority = createElement('div', 'input-container');
+        const priorityLabel = document.createElement('label');
+        priorityLabel.classList.add('priority-label');
+        priorityLabel.htmlFor = 'priority-input';
+        priorityLabel.innerText = 'Prioridad';
+        Priority.appendChild(priorityLabel);
+
+        const priorityInput = document.createElement('input');
+        priorityInput.name = 'priority-input';
+        priorityInput.id = 'priority-input';
+        priorityInput.type = 'checkbox';
+        Priority.appendChild(priorityInput);
+
     const Submit = document.createElement('button');
         Submit.classList.add('form-submit-btn');
         Submit.innerText = 'Añadir';
         Submit.addEventListener('click', (event) => {
             const parent = ((event.target as HTMLElement).parentNode as HTMLElement).parentNode as HTMLElement;
-            console.log(parent.dataset.type)
                 switch (parent.dataset.type) {
                     case 'project':
                         projectList.addProject(titleInput.value);
@@ -36,14 +75,18 @@ export default (() => {
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
                         const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!))
-                        console.log(targetProjectObject[0]);
-                        targetProjectObject[0].addTodo(createTodo(titleInput.value))
+                        targetProjectObject[0].addTodo(createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!))
+                        display.displayTasks(targetProjectObject[0])
                         break;
                     default:
                         break;
                 }
 
                 titleInput.value = '';
+                descriptionInput.value = '';
+                dateInput.value = '';
+                priorityInput.checked = false;
+
                 Modal.toggleModal()
         });
 
@@ -60,6 +103,9 @@ export default (() => {
         modalForm,
         Submit,
         Title,
+        Description,
+        DueDate,
+        Priority,
         Buttons,
     }
 })()
