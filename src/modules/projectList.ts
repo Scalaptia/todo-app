@@ -22,7 +22,6 @@ export default (() => {
             navbar.removeTab('project', project.id)
             const index = projects.indexOf(project);
             projects.splice(index, 1);
-            console.log(projects)
         } else {
             throw 'Project does not exist within the projects array';
         }

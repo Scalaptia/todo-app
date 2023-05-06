@@ -35,7 +35,7 @@ const displayHeader = (() => {
     }
 })()
 
-const createTaskEl = (todo: Todo) => {
+const createTaskEl = (todo: Todo, tab: Project) => {
     const container = createElement('div', 'task');
         const leftContainer = createElement('div', 'task-left');
             const taskStatus = createElement('div', 'task-status');
@@ -57,10 +57,17 @@ const createTaskEl = (todo: Todo) => {
             const taskEdit = document.createElement('img');
             taskEdit.classList.add('btn', 'task-edit');
             taskEdit.src = editSVG;
+            taskEdit.addEventListener('click', () => {
+                container.dataset.editing = 'true';
+                modal.editTaskModal(todo);
+            });
 
             const taskDelete = document.createElement('img');
             taskDelete.classList.add('btn', 'task-delete');
             taskDelete.src = deleteSVG;
+            taskDelete.addEventListener('click', () => {
+                tab.removeTodo(todo);
+            });
 
             const taskPriority = document.createElement('img');
             taskPriority.classList.add('btn', 'task-priority');
@@ -73,6 +80,7 @@ const createTaskEl = (todo: Todo) => {
 
     container.appendChild(leftContainer);
     container.appendChild(rightContainer);
+    container.dataset.taskid = `${todo.id}`
     return container
 }
 
@@ -135,7 +143,7 @@ export default (() => {
         if (isProject(tab)) {
             tab.todoList.forEach(todo => {
                 console.log(todo)
-                tasksSection.appendChild(createTaskEl(todo))
+                tasksSection.appendChild(createTaskEl(todo, tab))
             })
         }
     }

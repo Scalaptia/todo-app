@@ -1,30 +1,34 @@
-import { Todo } from "./todoFactory";
+import display from "../ui/display";
+import { Todo, createTodo } from "./todoFactory";
 
 export interface Project {
     type: string,
     id: number;
     title: string;
     todoList: Todo[];
-    addTodo: (todo: Todo) => void;
+    addTodo: (taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean) => void;
     removeTodo: (todo: Todo) => void;
 }
 
 export const createProject = (title: string, id: number) => {
     const type = 'project'
     const todoList: Todo[] = [];
+    let taskIDs = 0
 
-    function addTodo(todo: Todo) {
-        if (todo.title.length > 0) {
-            todoList.push(todo);
+    function addTodo(taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean) {
+        if (taskTitle.length > 0) {
+            todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs));
+            taskIDs++
         } else {
             throw 'Todo title must contain at least 1 charater';
         }
     }
 
-    function removeTodo(todo: Todo) {
+    function removeTodo(this: Project, todo: Todo) {
         if (todoList.includes(todo)) {
             const index = todoList.indexOf(todo);
             todoList.splice(index, 1);
+            display.displayTasks(this);
         } else {
             throw 'Todo does not exist within the todoList array';
         }

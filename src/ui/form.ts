@@ -74,8 +74,8 @@ export default (() => {
                     case 'task':
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
-                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!))
-                        targetProjectObject[0].addTodo(createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!))
+                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
+                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!);
                         display.displayTasks(targetProjectObject[0])
                         break;
                     default:
@@ -95,17 +95,53 @@ export default (() => {
         Cancel.innerText = 'Cerrar';
         Cancel.addEventListener('click', () => {Modal.toggleModal()});
 
-    const Buttons = createElement('div', 'form-buttons');
-        Buttons.appendChild(Cancel);
-        Buttons.appendChild(Submit);
+    const Edit = document.createElement('button');
+        Edit.classList.add('form-edit-btn');
+        Edit.innerText = 'Editar';
+        Edit.addEventListener('click', (event) => {
+            const parent = ((event.target as HTMLElement).parentNode as HTMLElement).parentNode as HTMLElement;
+                switch (parent.dataset.type) {
+                    case 'project':
+                        projectList.addProject(titleInput.value);
+                        break;
+                    case 'task':
+                        const projects = document.querySelector('.project-list');
+                        const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
+                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
+
+                        const tasks = document.querySelector('.task-section');
+                        const targetTaskElement = tasks!.querySelector(`[data-editing="true"]`) as HTMLElement
+                        const targetTaskObject =  targetProjectObject[0].todoList.filter(obj => obj.id === parseInt(targetTaskElement.dataset.taskid!));
+                        console.log(targetTaskObject)
+                        const taskid = targetTaskObject[0].id
+
+                        targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, taskid)) // Replace Todo with NEW Todo
+                        display.displayTasks(targetProjectObject[0])
+                        break;
+                    default:
+                        break;
+                }
+
+                titleInput.value = '';
+                descriptionInput.value = '';
+                dateInput.value = '';
+                priorityInput.checked = false;
+
+                Modal.toggleModal()
+        });
     
     return {
         modalForm,
         Submit,
+        Cancel,
+        Edit,
         Title,
         Description,
         DueDate,
         Priority,
-        Buttons,
+        titleInput,
+        descriptionInput,
+        dateInput,
+        priorityInput,
     }
 })()

@@ -21,6 +21,7 @@
     display: flex;
     box-shadow: 0px 2px 0px 0px var(--text-selected);
     transition: all 0.1s ease-in-out;
+    min-width: 32rem;
 }
 
 .display-header > .tab-image{
@@ -42,6 +43,7 @@
     padding: 1rem;
     height: calc(100% - 10rem);
     display: flex;
+    min-width: 22rem;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -112,6 +114,12 @@
 .task[data-status = "done"] .task-status {
     background-image: url(../assets/check.svg);
     background-color: var(--green);
+}
+
+.task-date {
+    font-size: 14px;
+    margin-right: 5px;
+
 }
 
 .task .btn {
