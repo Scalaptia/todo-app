@@ -8,7 +8,8 @@ import { format } from "date-fns";
 import addSVG from '../assets/add.svg'
 import editSVG from '../assets/edit.svg'
 import deleteSVG from '../assets/delete.svg'
-import importantSVG from '../assets/important.svg'
+import starSVG from '../assets/star.svg'
+import starCheckedSVG from '../assets/star-filled.svg'
 
 function isProject(obj: any): obj is Project {
     return Array.isArray(obj.todoList);
@@ -71,7 +72,12 @@ const createTaskEl = (todo: Todo, tab: Project) => {
 
             const taskPriority = document.createElement('img');
             taskPriority.classList.add('btn', 'task-priority');
-            taskPriority.src = importantSVG;
+            
+            todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
+            taskPriority.addEventListener('click', () => {
+                todo.priority = !todo.priority
+                todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
+            })
 
         rightContainer.appendChild(taskDate);
         rightContainer.appendChild(taskEdit);

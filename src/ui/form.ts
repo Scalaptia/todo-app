@@ -6,9 +6,17 @@ import { createElement } from "./pageUI";
 
 export default (() => {
     const modalForm = document.createElement('form');
+        modalForm.autocomplete = 'off';
         modalForm.classList.add('modal-form');
         modalForm.action = '#'
         modalForm.method = 'get'
+
+    function clearForm() {
+        titleInput.value = '';
+        descriptionInput.value = '';
+        dateInput.value = '';
+        priorityInput.checked = false;
+    }
     
     const Title = createElement('div', 'input-container');
         const titleLabel = document.createElement('label');
@@ -82,18 +90,17 @@ export default (() => {
                         break;
                 }
 
-                titleInput.value = '';
-                descriptionInput.value = '';
-                dateInput.value = '';
-                priorityInput.checked = false;
-
+                clearForm();
                 Modal.toggleModal()
         });
 
     const Cancel = document.createElement('button');
         Cancel.classList.add('form-cancel-btn');
         Cancel.innerText = 'Cerrar';
-        Cancel.addEventListener('click', () => {Modal.toggleModal()});
+        Cancel.addEventListener('click', () => {
+            clearForm();
+            Modal.toggleModal();
+        });
 
     const Edit = document.createElement('button');
         Edit.classList.add('form-edit-btn');
@@ -112,7 +119,6 @@ export default (() => {
                         const tasks = document.querySelector('.task-section');
                         const targetTaskElement = tasks!.querySelector(`[data-editing="true"]`) as HTMLElement
                         const targetTaskObject =  targetProjectObject[0].todoList.filter(obj => obj.id === parseInt(targetTaskElement.dataset.taskid!));
-                        console.log(targetTaskObject)
                         const taskid = targetTaskObject[0].id
 
                         targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, taskid)) // Replace Todo with NEW Todo
@@ -122,11 +128,7 @@ export default (() => {
                         break;
                 }
 
-                titleInput.value = '';
-                descriptionInput.value = '';
-                dateInput.value = '';
-                priorityInput.checked = false;
-
+                clearForm();
                 Modal.toggleModal()
         });
     

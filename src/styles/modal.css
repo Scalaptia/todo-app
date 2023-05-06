@@ -92,11 +92,11 @@ input:focus {
     background-color: #be123c;
 }
 
-.form-submit-btn {
+.form-submit-btn, .form-edit-btn {
     background-color: #064e3b;
 }
 
-.form-submit-btn:hover {
+.form-submit-btn:hover, .form-edit-btn:hover {
     background-color: #047857;
 }
 

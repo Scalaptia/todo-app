@@ -128,3 +128,8 @@
     height: 15px;
     width: 15px;
 }
+
+.task .btn:hover {
+    filter: invert(50%);
+    transition: all 0.1s ease-in-out;
+}
