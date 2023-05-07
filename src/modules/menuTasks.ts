@@ -4,7 +4,8 @@ import projectList from "./projectList";
 
 export default function (MenuItem: MenuItem) {
     MenuItem.todoList = []
-    const now = new Date();
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     switch (MenuItem.id) {
         case 0:
@@ -16,10 +17,10 @@ export default function (MenuItem: MenuItem) {
             console.log(MenuItem);
             break;
         case 1:
-            const twentyFourHoursFromNow = addDays(now, 1);
+            const twentyFourHoursFromNow = addDays(today, 1);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if(isWithinInterval(todo.dueDate, { start: now, end: twentyFourHoursFromNow })){
+                    if(isWithinInterval(todo.dueDate, { start: today, end: twentyFourHoursFromNow })){
                         MenuItem.todoList.push(todo);
                     }
                 });
@@ -27,10 +28,10 @@ export default function (MenuItem: MenuItem) {
             console.log(MenuItem);
             break;
         case 2:
-            const oneWeekFromNow = addHours(now, 24);
+            const oneWeekFromNow = addHours(today, 24);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if(isWithinInterval(todo.dueDate, {start: now, end: oneWeekFromNow})) {
+                    if(isWithinInterval(todo.dueDate, {start: today, end: oneWeekFromNow})) {
                         MenuItem.todoList.push(todo);
                     }
                 });
