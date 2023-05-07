@@ -83,7 +83,11 @@ export default (() => {
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
                         const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
-                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, false);
+                        const selectedDate = dateInput.valueAsDate!
+                        let timezoneOffset = selectedDate.getTimezoneOffset();
+                        selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+
+                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
                         display.displayTasks(targetProjectObject[0])
                         break;
                     default:
@@ -121,7 +125,11 @@ export default (() => {
                         const targetTaskObject =  targetProjectObject[0].todoList.filter(obj => obj.id === parseInt(targetTaskElement.dataset.taskid!));
                         const taskid = targetTaskObject[0].id
 
-                        targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, dateInput.valueAsDate!, priorityInput.checked!, taskid, false)) // Replace Todo with NEW Todo
+                        const selectedDate = dateInput.valueAsDate!
+                        let timezoneOffset = selectedDate.getTimezoneOffset();
+                        selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+
+                        targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, taskid, false)) // Replace Todo with NEW Todo
                         display.displayTasks(targetProjectObject[0])
                         break;
                     default:

@@ -58,7 +58,7 @@ const createTaskEl = (todo: Todo, tab: Project) => {
         
             const rightContainer = createElement('div', 'task-right');
             const taskDate = createElement('div', 'task-date');
-            if (todo.dueDate) {taskDate.innerText = format(todo.dueDate, 'dd/MM/yyyy')};
+            if (todo.dueDate) {taskDate.innerText = format(todo.dueDate, 'MM/dd/yyyy')};
             rightContainer.appendChild(taskDate);
         
             const taskEdit = document.createElement('img');
