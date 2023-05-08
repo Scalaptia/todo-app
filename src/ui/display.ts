@@ -111,7 +111,6 @@ const addTaskBtn = (() => {
 
 const tasksSection = (() => {
     const container = createElement('div', 'task-section');
-
     return container
 })()
 

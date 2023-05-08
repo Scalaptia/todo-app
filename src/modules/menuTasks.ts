@@ -11,7 +11,9 @@ export default function (MenuItem: MenuItem) {
         case 0:
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    MenuItem.todoList.push(todo);
+                    if (!todo.status){
+                        MenuItem.todoList.push(todo);
+                    }
                 });
             });
             console.log(MenuItem);
@@ -20,8 +22,10 @@ export default function (MenuItem: MenuItem) {
             const twentyFourHoursFromNow = addDays(today, 1);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if(isWithinInterval(todo.dueDate, { start: today, end: twentyFourHoursFromNow })){
-                        MenuItem.todoList.push(todo);
+                    if (!todo.status){
+                        if(isWithinInterval(todo.dueDate, { start: today, end: twentyFourHoursFromNow })){
+                            MenuItem.todoList.push(todo);
+                        }
                     }
                 });
             });
@@ -31,8 +35,10 @@ export default function (MenuItem: MenuItem) {
             const oneWeekFromNow = addHours(today, 24);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if(isWithinInterval(todo.dueDate, {start: today, end: oneWeekFromNow})) {
-                        MenuItem.todoList.push(todo);
+                    if (!todo.status){
+                        if(isWithinInterval(todo.dueDate, {start: today, end: oneWeekFromNow})) {
+                            MenuItem.todoList.push(todo);
+                        }
                     }
                 });
             });
@@ -41,8 +47,10 @@ export default function (MenuItem: MenuItem) {
         case 3:
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if(todo.priority) {
-                        MenuItem.todoList.push(todo);
+                    if (!todo.status) {
+                        if(todo.priority) {
+                            MenuItem.todoList.push(todo);
+                        }
                     }
                 });
             });

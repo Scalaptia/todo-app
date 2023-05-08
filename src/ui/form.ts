@@ -84,8 +84,10 @@ export default (() => {
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
                         const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
                         const selectedDate = dateInput.valueAsDate!
-                        let timezoneOffset = selectedDate.getTimezoneOffset();
-                        selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+                        if (dateInput.valueAsDate) {
+                            let timezoneOffset = selectedDate.getTimezoneOffset();
+                            selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+                        }
 
                         targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
                         display.displayTasks(targetProjectObject[0])
@@ -126,8 +128,10 @@ export default (() => {
                         const taskid = targetTaskObject[0].id
 
                         const selectedDate = dateInput.valueAsDate!
-                        let timezoneOffset = selectedDate.getTimezoneOffset();
-                        selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+                        if (dateInput.valueAsDate) {
+                            let timezoneOffset = selectedDate.getTimezoneOffset();
+                            selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
+                        }
 
                         targetProjectObject[0].todoList.splice(taskid, 1, createTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, taskid, false)) // Replace Todo with NEW Todo
                         display.displayTasks(targetProjectObject[0])
