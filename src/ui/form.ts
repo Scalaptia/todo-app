@@ -90,7 +90,6 @@ export default (() => {
                         }
 
                         targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
-                        display.displayTasks(targetProjectObject[0])
                         break;
                     default:
                         break;

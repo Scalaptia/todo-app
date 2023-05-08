@@ -15,10 +15,11 @@ export const createProject = (title: string, id: number) => {
     const todoList: Todo[] = [];
     let taskIDs = 0
 
-    function addTodo(taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
+    function addTodo(this: Project, taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
         if (taskTitle.length > 0) {
             todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
             taskIDs++
+            display.displayTasks(this);
         } else {
             throw 'Todo title must contain at least 1 charater';
         }
@@ -26,8 +27,7 @@ export const createProject = (title: string, id: number) => {
 
     function removeTodo(this: Project, todo: Todo) {
         if (todoList.includes(todo)) {
-            const index = todoList.indexOf(todo);
-            todoList.splice(index, 1);
+            this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
         } else {
             throw 'Todo does not exist within the todoList array';

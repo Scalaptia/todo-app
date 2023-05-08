@@ -20,7 +20,7 @@ export default (() => {
             container.appendChild(logo);
     
             const title = createElement('h1', 'nav-title');
-            title.innerText = 'Tareas';
+            title.innerText = 'TodoApp';
             container.appendChild(title);
     
             const toggleBtn = createElement('img', 'toggle-dark-btn');
@@ -40,7 +40,7 @@ export default (() => {
         const container = createElement('div', 'project-list');
             const titleSection = createElement('div', 'add-project-section');
                 const addBtnTitle = createElement('h3', 'add-btn-title');
-                addBtnTitle.innerText = 'Materias';
+                addBtnTitle.innerText = 'Projects';
                 titleSection.appendChild(addBtnTitle);
     
                 const addBtn = document.createElement('img');
@@ -66,7 +66,7 @@ export default (() => {
     })()
 
     
-    const createTab = (type: string, name: string, svg: string, id: number) => {
+    function createTab (type: string, name: string, svg: string, id: number) {
         const tab = createElement('div', 'tab');
 
             const nameContainer = createElement('div', 'tab-name-container');
@@ -74,7 +74,7 @@ export default (() => {
                 tabSVG.classList.add('tab-image');
                 tabSVG.src = svg;
         
-                const tabName = createElement('li', `tab-name`);
+                const tabName = createElement('p', `tab-name`);
                 tabName.textContent = name;
             nameContainer.appendChild(tabSVG);
             nameContainer.appendChild(tabName);
@@ -141,7 +141,7 @@ export default (() => {
         }
     }
 
-    const removeTab = (type: string, id: number) => {
+    function removeTab (type: string, id: number) {
         switch (type) {
             case 'menu':
                 throw 'Cannot remove menu item';

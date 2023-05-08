@@ -19,10 +19,10 @@ export function createElement(tag: string, className: string) {
 export default function generatePage() {
         app!.appendChild(Modal.modal);
         app!.appendChild(navbar.sidebar);
-        app!.appendChild(display.container);
+        app!.appendChild(display.main);
 
-        menuList.addItem('Todos', allTasks);
-        menuList.addItem('Hoy', todayTasks);
-        menuList.addItem('Semana', weekTasks);
-        menuList.addItem('Importantes', importantTasks);
+        menuList.addItem('All Tasks', allTasks);
+        menuList.addItem('Today', todayTasks);
+        menuList.addItem('Week', weekTasks);
+        menuList.addItem('Important', importantTasks);
 }

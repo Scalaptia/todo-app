@@ -16,7 +16,6 @@ export default function (MenuItem: MenuItem) {
                     }
                 });
             });
-            console.log(MenuItem);
             break;
         case 1:
             const twentyFourHoursFromNow = addDays(today, 1);
@@ -29,7 +28,6 @@ export default function (MenuItem: MenuItem) {
                     }
                 });
             });
-            console.log(MenuItem);
             break;
         case 2:
             const oneWeekFromNow = addHours(today, 24);
@@ -42,7 +40,6 @@ export default function (MenuItem: MenuItem) {
                     }
                 });
             });
-            console.log(MenuItem);
             break;
         case 3:
             projectList.projects.forEach(project => {
@@ -54,7 +51,6 @@ export default function (MenuItem: MenuItem) {
                     }
                 });
             });
-            console.log(MenuItem);
             break;
         default:
             throw "Menu item doesn't exist"
