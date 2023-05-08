@@ -132,6 +132,7 @@ export default (() => {
 
         if (tab === undefined) {
             header.updateHeader('Select Tab')
+            return;
         }
 
         const menuElements = document.querySelector('.menu-list');

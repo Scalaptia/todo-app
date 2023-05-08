@@ -81,6 +81,7 @@
 }
 
 .task {
+    position: relative;
     color:  var(--text-selected);
     background-color: var(--front-secondary);
     padding: 10px;
@@ -91,7 +92,7 @@
     justify-content: space-between;
     align-items: center;
     outline: 1px solid var(--text-selected);
-    transition: all 0.1s ease-in-out;
+    transition: all 0.25s ease-in-out;
 }
 
 .task-left, .task-right {
@@ -99,9 +100,30 @@
     gap: 10px;
 }
 
+.task-left {
+    position: relative;
+    width: calc(100% - 200px);
+}
+
+.task-right {
+    position: relative;
+    margin-right: 10px;
+}
+
+.task:hover {
+    background-color: var(--background-hover);
+}
+
+.task-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 .task-status {
-    width: 25px;
-    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
     border-radius: 50%;
     border: 1px solid var(--text-selected);
     transition: all 0.1s ease-in-out;
@@ -119,7 +141,8 @@
 .task-date {
     font-size: 14px;
     margin-right: 5px;
-
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .task .btn {

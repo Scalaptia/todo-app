@@ -30,8 +30,6 @@ export const createProject = (title: string, id: number) => {
             this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
         } else {
-            console.log(todo)
-            console.log(this)
             throw 'Todo does not exist within the todoList array';
         }
     }
