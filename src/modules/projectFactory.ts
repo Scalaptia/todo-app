@@ -17,7 +17,7 @@ export const createProject = (title: string, id: number) => {
 
     function addTodo(this: Project, taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
         if (taskTitle.length > 0) {
-            todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
+            this.todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
             taskIDs++
             display.displayTasks(this);
         } else {
@@ -26,10 +26,12 @@ export const createProject = (title: string, id: number) => {
     }
 
     function removeTodo(this: Project, todo: Todo) {
-        if (todoList.includes(todo)) {
+        if (this.todoList.includes(todo)) {
             this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
         } else {
+            console.log(todo)
+            console.log(this)
             throw 'Todo does not exist within the todoList array';
         }
     }

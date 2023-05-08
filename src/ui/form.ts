@@ -81,16 +81,16 @@ export default (() => {
                     case 'task':
                         const projects = document.querySelector('.project-list');
                         const targetProjectElement = projects!.querySelector(`[data-selected="true"]`) as HTMLElement
-                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!));
+                        const targetProjectObject = projectList.projects.filter(obj => obj.id === parseInt(targetProjectElement.dataset.projectid!))[0];
                         const selectedDate = dateInput.valueAsDate!
+
                         if (dateInput.valueAsDate) {
                             let timezoneOffset = selectedDate.getTimezoneOffset();
                             selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
                         }
 
-                        targetProjectObject[0].addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
-                        break;
-                    default:
+                        targetProjectObject.addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
+                        console.log(targetProjectObject)
                         break;
                 }
 
