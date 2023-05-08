@@ -10,12 +10,13 @@ import display from './display';
 import menuTasks from '../modules/menuTasks';
 
 export default (() => {
-    const createNavHeader = () => {
+
+    const navHeader = (() => {
         const container = createElement('div', 'nav-header');
     
             const logo = document.createElement('img');
             logo.classList.add('nav-logo');
-            logo.src = logoSVG
+            logo.src = logoSVG;
             container.appendChild(logo);
     
             const title = createElement('h1', 'nav-title');
@@ -25,48 +26,44 @@ export default (() => {
             const toggleBtn = createElement('img', 'toggle-dark-btn');
             container.appendChild(toggleBtn);
     
-        return { container }
-    }
-    const navHeader = createNavHeader()
+        return container;
+    })() 
     
+
+    const menuList = (() => {
+        const container = createElement('div', 'menu-list');
+        return container;
+    })()
     
-    const createMenuList = () => {
-        const container = createElement('div', 'menu-list')
-        return container
-    }
-    const menuList = createMenuList()
-    
-    
-    const createProjectList = () => {
+
+    const projectList = (() => {
         const container = createElement('div', 'project-list');
             const titleSection = createElement('div', 'add-project-section');
                 const addBtnTitle = createElement('h3', 'add-btn-title');
-                addBtnTitle.innerText = 'Materias'
+                addBtnTitle.innerText = 'Materias';
                 titleSection.appendChild(addBtnTitle);
     
                 const addBtn = document.createElement('img');
                 addBtn.classList.add('add-btn', 'btn');
-                addBtn.src = addSVG
+                addBtn.src = addSVG;
                 addBtn.addEventListener('click', () => {Modal.projectModal()});
                 titleSection.appendChild(addBtn);
-            container.appendChild(titleSection)
-        return container
-    }
-    const projectList = createProjectList()
+            container.appendChild(titleSection);
+        return container;
+    })()
     
     
-    const createSidebar = () => {
+    const sidebar = (() => {
         const container = createElement('div', 'navbar');
             const sidebar = createElement('div', 'sidebar');
                 sidebar.appendChild(menuList);
                 sidebar.appendChild(projectList);
     
-        container.appendChild(navHeader.container);
+        container.appendChild(navHeader);
         container.appendChild(sidebar);
     
-        return container
-    }
-    const sidebar = createSidebar()
+        return container;
+    })()
 
     
     const createTab = (type: string, name: string, svg: string, id: number) => {
@@ -75,7 +72,7 @@ export default (() => {
             const nameContainer = createElement('div', 'tab-name-container');
                 const tabSVG = document.createElement('img');
                 tabSVG.classList.add('tab-image');
-                tabSVG.src = svg
+                tabSVG.src = svg;
         
                 const tabName = createElement('li', `tab-name`);
                 tabName.textContent = name;
@@ -89,7 +86,7 @@ export default (() => {
 
                 tabDelete.addEventListener('click', () => {
                     const targetProject = projectArray.projects.filter(obj => obj.id === id);
-                    projectArray.removeProject(targetProject[0])
+                    projectArray.removeProject(targetProject[0]);
                 });
             buttonsContainer.appendChild(tabDelete);
         
@@ -106,7 +103,7 @@ export default (() => {
             // Set all tabs to not-selected
             for (let i = 0; i < menuElements!.length; i++) {
                 const item: any = menuElements![i];
-                item.dataset.selected = 'false'
+                item.dataset.selected = 'false';
             }
     
             for (let i = 0; i < projectElements!.length; i++) {
@@ -138,7 +135,7 @@ export default (() => {
                 menuList.appendChild(tab);
                 break;
             case 'project':
-                tab.dataset.projectid = `${id}`
+                tab.dataset.projectid = `${id}`;
                 projectList.insertBefore(tab, projectList.children[1]);
                 break;
         }
@@ -147,9 +144,9 @@ export default (() => {
     const removeTab = (type: string, id: number) => {
         switch (type) {
             case 'menu':
-                throw 'Cannot remove menu item'
+                throw 'Cannot remove menu item';
             case 'project':
-                const targetProject = projectList.querySelector(`[data-projectid="${id}"]`)
+                const targetProject = projectList.querySelector(`[data-projectid="${id}"]`);
                 projectList.removeChild(targetProject!);
                 break;
         }
