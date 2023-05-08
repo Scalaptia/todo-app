@@ -9,61 +9,66 @@ import menuArray from '../modules/menuList'
 import display from './display';
 import menuTasks from '../modules/menuTasks';
 
-const NavHeader = () => {
-    const navHeader = createElement('div', 'nav-header');
-
-        const logo = document.createElement('img');
-        logo.classList.add('nav-logo');
-        logo.src = logoSVG
-        navHeader.appendChild(logo);
-
-        const title = createElement('h1', 'nav-title');
-        title.innerText = 'Tareas';
-        navHeader.appendChild(title);
-
-        const toggleBtn = createElement('img', 'toggle-dark-btn');
-        navHeader.appendChild(toggleBtn);
-
-    return navHeader
-}
-
-const MenuList = () => {
-    const container = createElement('div', 'menu-list')
-    return {
-        container,
-    }
-}
-const menuList = MenuList()
-
-const ProjectList = () => {
-    const container = createElement('div', 'project-list');
-        const titleSection = createElement('div', 'add-project-section');
-            const addBtnTitle = createElement('h3', 'add-btn-title');
-            addBtnTitle.innerText = 'Materias'
-            titleSection.appendChild(addBtnTitle);
-
-            const addBtn = document.createElement('img');
-            addBtn.classList.add('add-btn', 'btn');
-            addBtn.src = addSVG
-            addBtn.addEventListener('click', () => {Modal.projectModal()});
-            titleSection.appendChild(addBtn);
-        container.appendChild(titleSection)
-    return {
-        container
-    }
-}
-const projectList = ProjectList()
-
-
 export default (() => {
-    const container = createElement('div', 'navbar');
-        const sidebar = createElement('div', 'sidebar');
-            sidebar.appendChild(menuList.container);
-            sidebar.appendChild(projectList.container);
+    const createNavHeader = () => {
+        const container = createElement('div', 'nav-header');
+    
+            const logo = document.createElement('img');
+            logo.classList.add('nav-logo');
+            logo.src = logoSVG
+            container.appendChild(logo);
+    
+            const title = createElement('h1', 'nav-title');
+            title.innerText = 'Tareas';
+            container.appendChild(title);
+    
+            const toggleBtn = createElement('img', 'toggle-dark-btn');
+            container.appendChild(toggleBtn);
+    
+        return { container }
+    }
+    const navHeader = createNavHeader()
+    
+    
+    const createMenuList = () => {
+        const container = createElement('div', 'menu-list')
+        return container
+    }
+    const menuList = createMenuList()
+    
+    
+    const createProjectList = () => {
+        const container = createElement('div', 'project-list');
+            const titleSection = createElement('div', 'add-project-section');
+                const addBtnTitle = createElement('h3', 'add-btn-title');
+                addBtnTitle.innerText = 'Materias'
+                titleSection.appendChild(addBtnTitle);
+    
+                const addBtn = document.createElement('img');
+                addBtn.classList.add('add-btn', 'btn');
+                addBtn.src = addSVG
+                addBtn.addEventListener('click', () => {Modal.projectModal()});
+                titleSection.appendChild(addBtn);
+            container.appendChild(titleSection)
+        return container
+    }
+    const projectList = createProjectList()
+    
+    
+    const createSidebar = () => {
+        const container = createElement('div', 'navbar');
+            const sidebar = createElement('div', 'sidebar');
+                sidebar.appendChild(menuList);
+                sidebar.appendChild(projectList);
+    
+        container.appendChild(navHeader.container);
+        container.appendChild(sidebar);
+    
+        return container
+    }
+    const sidebar = createSidebar()
 
-    container.appendChild(NavHeader());
-    container.appendChild(sidebar);
-
+    
     const createTab = (type: string, name: string, svg: string, id: number) => {
         const tab = createElement('div', 'tab');
 
@@ -95,9 +100,10 @@ export default (() => {
         }
             
         tab.addEventListener('click', () => {
-            const menuElements = menuList.container?.children;
-            const projectElements = projectList.container?.children;
+            const menuElements = menuList?.children;
+            const projectElements = projectList?.children;
     
+            // Set all tabs to not-selected
             for (let i = 0; i < menuElements!.length; i++) {
                 const item: any = menuElements![i];
                 item.dataset.selected = 'false'
@@ -108,6 +114,7 @@ export default (() => {
                 item.dataset.selected = 'false';
             }
 
+            // Set selected tab object to selected
             switch (type) {
                 case 'menu':
                     const targetItem = menuArray.items.filter(obj => obj.id === id);
@@ -123,19 +130,17 @@ export default (() => {
             tab.dataset.selected = 'true';
         });
 
-        tab.dataset.selected = 'false';
+        tab.dataset.selected = 'false'; // Default to not-selected
     
         switch (type) {
             case 'menu':
                 tab.dataset.menuid = `${id}`
-                menuList.container.appendChild(tab);
+                menuList.appendChild(tab);
                 break;
             case 'project':
                 tab.dataset.projectid = `${id}`
-                projectList.container.insertBefore(tab, projectList.container.children[1]);
+                projectList.insertBefore(tab, projectList.children[1]);
                 break;
-            default:
-                throw 'Tab is not of type Task of Project'
         }
     }
 
@@ -144,16 +149,14 @@ export default (() => {
             case 'menu':
                 throw 'Cannot remove menu item'
             case 'project':
-                const targetProject = projectList.container.querySelector(`[data-projectid="${id}"]`)
-                projectList.container.removeChild(targetProject!);
-                break;
-            default:
+                const targetProject = projectList.querySelector(`[data-projectid="${id}"]`)
+                projectList.removeChild(targetProject!);
                 break;
         }
     }
 
     return {
-        container,
+        sidebar,
         createTab,
         removeTab,
     };

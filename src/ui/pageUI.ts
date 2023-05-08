@@ -18,7 +18,7 @@ export function createElement(tag: string, className: string) {
 
 export default function generatePage() {
         app!.appendChild(Modal.modal);
-        app!.appendChild(navbar.container);
+        app!.appendChild(navbar.sidebar);
         app!.appendChild(display.container);
 
         menuList.addItem('Todos', allTasks);
