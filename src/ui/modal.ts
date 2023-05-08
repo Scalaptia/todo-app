@@ -16,7 +16,7 @@ export default (() => {
         toggleModal();
         const container = createElement('div', 'modal-container');
             const modalTitle = createElement('h1', 'modal-title');
-            modalTitle.innerText = 'Añadir Tarea';
+            modalTitle.innerText = 'Add Task';
 
             const Buttons = createElement('div', 'form-buttons');
                 Buttons.appendChild(Form.Cancel);
@@ -41,7 +41,7 @@ export default (() => {
         toggleModal();
         const container = createElement('div', 'modal-container');
             const modalTitle = createElement('h1', 'modal-title');
-            modalTitle.innerText = 'Editar Tarea';
+            modalTitle.innerText = 'Edit Task';
 
             const formContainer = createElement('div', 'form-container');
                 formContainer.dataset.type = 'task';
@@ -73,7 +73,7 @@ export default (() => {
         toggleModal();
         const container = createElement('div', 'modal-container');
             const modalTitle = createElement('h1', 'modal-title');
-            modalTitle.innerText = 'Añadir Materia';
+            modalTitle.innerText = 'Add Project';
 
             const Buttons = createElement('div', 'form-buttons');
                 Buttons.appendChild(Form.Cancel);

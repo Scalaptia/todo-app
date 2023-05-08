@@ -138,25 +138,19 @@ export default (() => {
         const projectElements = document.querySelector('.project-list');
         let tabElement;
         
-        switch (tab.type) {
-            case 'menu-item':
-                tabElement = menuElements!.querySelector(`[data-menuid="${tab.id}"]`) as HTMLElement
+        if (tab.type === 'project' && isProject(tab)) {
+            tabElement = projectElements!.querySelector(`[data-projectid="${tab.id}"]`) as HTMLElement
+                header.updateHeader(tabElement);
+                displayMain.appendChild(addTaskBtn); 
+        } else if (tab.type === 'menu-item') {
+            tabElement = menuElements!.querySelector(`[data-menuid="${tab.id}"]`) as HTMLElement
                 header.updateHeader(tabElement);
                 if (displayMain.contains(addTaskBtn)) {displayMain.removeChild(addTaskBtn)};
-                break;
+        }
 
-            case 'project':
-                tabElement = projectElements!.querySelector(`[data-projectid="${tab.id}"]`) as HTMLElement
-                header.updateHeader(tabElement)
-                displayMain.appendChild(addTaskBtn);
-                break;    
-        }
-        
-        if (isProject(tab)) {
-            tab.todoList.forEach(todo => {
-                tasksSection.appendChild(createTaskEl(todo, tab))
-            })
-        }
+        tab.todoList.forEach(todo => {
+            tasksSection.appendChild(createTaskEl(todo, tab));
+        })
     }
 
     const main = (() =>{
