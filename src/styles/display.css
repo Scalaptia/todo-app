@@ -20,8 +20,8 @@
     justify-content: center;
     display: flex;
     box-shadow: 0px 2px 0px 0px var(--text-selected);
-    transition: all 0.1s ease-in-out;
     min-width: 32rem;
+    transition: all 0.1s ease-in-out;
 }
 
 .display-header > .tab-image{
@@ -155,4 +155,24 @@
 .task .btn:hover {
     filter: invert(50%);
     transition: all 0.1s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+    .display {
+        grid-column: 1;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .display-header {
+        min-width: auto;
+    }
+
+    .display-tasks {
+        margin: 2rem;
+        padding: 1rem;
+        height: calc(100vh - 14rem);
+
+        min-width: auto;
+    }
 }

@@ -10,6 +10,7 @@
 /* Header */
 .nav-header {
     display: flex;
+    width: 100%;
     height: 4rem;
     align-items: center;
     gap: 20px;
@@ -113,4 +114,14 @@
 
 .btn:hover {
     filter: invert(50%);
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        translate: -100%
+    }
+
 }

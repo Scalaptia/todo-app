@@ -97,7 +97,7 @@ input:focus {
     border: none;
     padding: 10px 15px 10px 15px;
     border-radius: 10px;
-    width: 5rem;
+    min-width: 5rem;
     transition: all 0.1s ease-in-out;
 }
 
@@ -117,4 +117,14 @@ input:focus {
     background-color: #047857;
 }
 
+
+@media only screen and (max-width: 768px) {
+    .modal-container {
+        width: clamp(16rem, 80%, 32rem);
+    }
+
+    .form-buttons {
+        justify-content: center;
+    }
+}
 

@@ -22,10 +22,19 @@ body {
     display: grid;
     grid-template-columns: 16rem calc(100vw - 16rem);
     height: 100%;
+    overflow: hidden;
 }
 
 img {
     user-select: none;
     -webkit-user-select: none;
     -webkit-user-drag: none;
+}
+
+@media only screen and (max-width: 768px) {
+    #app {
+        height: 100vh;
+        width: 100vw;
+        grid-template-columns: 100vw;
+    }
 }
