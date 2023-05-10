@@ -3,6 +3,9 @@
     background-color: var(--background-color);
     height: 100%;
     gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .display-header {
@@ -43,12 +46,13 @@
 .display-tasks {
     background-color: var(--front-color);
     border-radius: 10px;
-    margin: 4rem;
-    margin-top: 2rem;
+    margin: 2rem 4rem;
+    margin-top: 0;
     padding: 1rem;
-    height: calc(100% - 10rem);
+    height: calc(100vh - 10rem);
+    max-height: calc(100vh - 10rem);
     display: flex;
-    min-width: 22rem;
+    width: clamp(22rem, 80%, 80rem);
     flex-direction: column;
     justify-content: space-between;
 }
@@ -57,10 +61,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 1px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.task-section::-webkit-scrollbar {
+    display: none;
 }
 
 .add-task-section {
-    color:  var(--text-selected);
+    bottom: 0;
+    color: var(--text-selected);
     background-color: var(--background-hover);
     padding: 10px;
     padding-left: 20px;
@@ -68,6 +80,7 @@
     border-radius: 20px;
     display: flex;
     align-items: center;
+    margin-top: 26px;
     margin-bottom: 10px;
     outline: 1px solid var(--text-selected);
     transition: all 0.1s ease-in-out;
@@ -85,6 +98,8 @@
     transition: all 0.1s ease-in-out;
 }
 
+/* Task section */
+
 .task {
     position: relative;
     color:  var(--text-selected);
@@ -92,6 +107,7 @@
     padding: 10px;
     padding-left: 20px;
     height: 2rem;
+    min-height: 2rem;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
@@ -163,21 +179,22 @@
     transition: all 0.1s ease-in-out;
 }
 
+
 /* Handle Small Tasks*/
 
 .task[data-small = "true"] {
     flex-direction: column;
-    gap: 20px;
     align-items: start;
 }
 
 .task[data-small = "true"]  > .task-right {
-    opacity: 1;
+    opacity: 0;
     align-self: end;
     pointer-events: none;
 }
 
 .task[data-small = "true"][data-expanded = "true"] > .task-right {
+    opacity: 1;
     pointer-events: all;
 }
 
@@ -186,7 +203,7 @@
 }
 
 .task[data-small = "true"][data-expanded = "true"] {
-    height: 8rem;
+    min-height: 8rem;
     pointer-events: all;
 }
 
@@ -206,10 +223,9 @@
     }
 
     .display-tasks {
-        margin: 2rem;
+        margin-bottom: 0;
         padding: 1rem;
-        height: calc(100vh - 10qrem);
-
+        width: 80%;
         min-width: auto;
     }
 }
