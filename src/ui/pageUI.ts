@@ -9,6 +9,7 @@ import weekTasks from '../assets/week.svg';
 import importantTasks from '../assets/important.svg'
 
 export const app = document.querySelector<HTMLDivElement>('#app');
+app!.dataset.navbar = 'show'
 
 export function createElement(tag: string, className: string) {
         const element = document.createElement(tag);

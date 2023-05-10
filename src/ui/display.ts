@@ -10,6 +10,7 @@ import editSVG from '../assets/edit.svg'
 import deleteSVG from '../assets/delete.svg'
 import starSVG from '../assets/star.svg'
 import starCheckedSVG from '../assets/star-filled.svg'
+import { handleToggleNavbar } from "./navbar";
 
 export default (() => {
     function isProject(obj: any): obj is Project {
@@ -19,13 +20,14 @@ export default (() => {
     const header = (() => {
         const container = createElement('div', 'display-header');
             const headerTab = createElement('div', 'header-tab');
+            headerTab.addEventListener('click', handleToggleNavbar);
         container.appendChild(headerTab);
     
         function updateHeader(tab: HTMLElement | string) {
             if (typeof tab === 'string') {
-                container.innerHTML = tab;
+                headerTab.innerHTML = tab;
             } else if (tab instanceof HTMLElement) {
-                container.innerHTML = `${tab.children[0].innerHTML}`;
+                headerTab.innerHTML = `${tab.children[0].innerHTML}`;
             }
         }
     

@@ -1,5 +1,5 @@
 import '../styles/navbar.css';
-import { createElement } from './pageUI';
+import { app, createElement } from './pageUI';
 import logoSVG from '../assets/logo.svg';
 import addSVG from '../assets/add.svg';
 import deleteSVG from '../assets/delete.svg'
@@ -9,14 +9,21 @@ import menuArray from '../modules/menuList'
 import display from './display';
 import menuTasks from '../modules/menuTasks';
 
-export default (() => {
+export function handleToggleNavbar() {
+    if (screen.width <= 768) {
+        app!.dataset.navbar === 'show' ? app!.dataset.navbar = 'hide' : app!.dataset.navbar = 'show';
+    }
+}
 
+export default (() => {
     const navHeader = (() => {
         const container = createElement('div', 'nav-header');
     
             const logo = document.createElement('img');
             logo.classList.add('nav-logo');
             logo.src = logoSVG;
+            logo.addEventListener('click', handleToggleNavbar);
+
             container.appendChild(logo);
     
             const title = createElement('h1', 'nav-title');
@@ -124,6 +131,7 @@ export default (() => {
                     break;
             }
 
+            handleToggleNavbar();
             tab.dataset.selected = 'true';
         });
 

@@ -7,7 +7,7 @@
 
 .display-header {
     display: flex;
-    height: 4rem;
+    min-height: 4rem;
     width: 100%;
     background-color: var(--front-color);
     font-size: 20px;
@@ -15,7 +15,6 @@
     list-style: none;
     color: var(--text-color);
     margin-bottom: 10px;
-    gap: 10px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -24,11 +23,17 @@
     transition: all 0.1s ease-in-out;
 }
 
-.display-header > .tab-image{
+.header-tab {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.header-tab > .tab-image{
     width: 25px;
 }
 
-.display-header > .tab-name {
+.header-tab > .tab-name {
     margin-bottom: 2px;
     color: var(--text-selected);
 }
@@ -162,6 +167,8 @@
         grid-column: 1;
         width: 100vw;
         height: 100vh;
+        translate: 100%;
+        transition: translate 0.5s ease-in-out;
     }
 
     .display-header {
@@ -171,7 +178,7 @@
     .display-tasks {
         margin: 2rem;
         padding: 1rem;
-        height: calc(100vh - 14rem);
+        height: calc(100vh - 10qrem);
 
         min-width: auto;
     }
