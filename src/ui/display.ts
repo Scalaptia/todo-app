@@ -134,6 +134,7 @@ export default (() => {
 
         if (tab === undefined) {
             header.updateHeader('Select Tab')
+            displayMain.removeChild(addTaskBtn)
             return;
         }
 

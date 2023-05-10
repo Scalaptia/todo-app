@@ -28,6 +28,7 @@ export default (() => {
     
             const title = createElement('h1', 'nav-title');
             title.innerText = 'TodoApp';
+            title.addEventListener('click', handleToggleNavbar);
             container.appendChild(title);
     
             const toggleBtn = createElement('img', 'toggle-dark-btn');
@@ -91,7 +92,9 @@ export default (() => {
                 tabDelete.classList.add('tab-delete', 'btn');
                 tabDelete.src = deleteSVG;
 
-                tabDelete.addEventListener('click', () => {
+                tabDelete.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    display.displayTasks(undefined!)
                     const targetProject = projectArray.projects.filter(obj => obj.id === id);
                     projectArray.removeProject(targetProject[0]);
                 });
