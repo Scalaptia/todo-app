@@ -9,9 +9,9 @@ export default (() => {
     function addProject(title: string) {
         if (title.length > 0) {
             navbar.createTab('project', title, projectIcon, projectIDs);
-            projects.unshift(createProject(title, projectIDs));
+            let tempProject = createProject(title, projectIDs) ;
+            projects.unshift(tempProject);
             projectIDs++;
-            console.log(projects)
         } else {
             throw 'Project title must contain at least 1 charater';
         }

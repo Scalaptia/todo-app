@@ -97,6 +97,7 @@
     justify-content: space-between;
     align-items: center;
     outline: 1px solid var(--text-selected);
+    overflow: hidden;
     transition: all 0.25s ease-in-out;
 }
 
@@ -161,6 +162,35 @@
     filter: invert(50%);
     transition: all 0.1s ease-in-out;
 }
+
+/* Handle Small Tasks*/
+
+.task[data-small = "true"] {
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+}
+
+.task[data-small = "true"]  > .task-right {
+    opacity: 1;
+    align-self: end;
+    pointer-events: none;
+}
+
+.task[data-small = "true"][data-expanded = "true"] > .task-right {
+    pointer-events: all;
+}
+
+.task[data-small = "true"]  > .task-left {
+    width: 100%;
+}
+
+.task[data-small = "true"][data-expanded = "true"] {
+    height: 8rem;
+    pointer-events: all;
+}
+
+/***********************/
 
 @media only screen and (max-width: 768px) {
     .display {

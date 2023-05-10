@@ -44,7 +44,8 @@ export default (() => {
                 container.dataset.status = 'not done';
                 (todo.status) ? (container.dataset.status = 'done') : (container.dataset.status = 'not done');
 
-                taskStatus.addEventListener('click', () => {
+                taskStatus.addEventListener('click', (event) => {
+                    event.stopPropagation();
                     todo.status = !todo.status;
                     (todo.status) ? (container.dataset.status = 'done') : (container.dataset.status = 'not done');
                     if (todo.status) {
@@ -69,7 +70,8 @@ export default (() => {
                     const taskEdit = document.createElement('img');
                     taskEdit.classList.add('btn', 'task-edit');
                     taskEdit.src = editSVG;
-                    taskEdit.addEventListener('click', () => {
+                    taskEdit.addEventListener('click', (event) => {
+                        event.stopPropagation();
                         container.dataset.editing = 'true';
                         modal.editTaskModal(todo);
                     });
@@ -78,7 +80,8 @@ export default (() => {
                     const taskDelete = document.createElement('img');
                     taskDelete.classList.add('btn', 'task-delete');
                     taskDelete.src = deleteSVG;
-                    taskDelete.addEventListener('click', () => {
+                    taskDelete.addEventListener('click', (event) => {
+                        event.stopPropagation();
                         tab.removeTodo(todo);
                     });
                     rightContainer.appendChild(taskDelete);
@@ -87,14 +90,29 @@ export default (() => {
                 const taskPriority = document.createElement('img');
                 taskPriority.classList.add('btn', 'task-priority');
                 todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
-                taskPriority.addEventListener('click', () => {
+                taskPriority.addEventListener('click', (event) => {
+                    event.stopPropagation();
                     todo.priority = !todo.priority
                     todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
                 })
                 rightContainer.appendChild(taskPriority);
             container.appendChild(rightContainer);
 
-        container.dataset.taskid = `${todo.id}`
+            container.dataset.taskid = `${todo.id}`
+            container.dataset.expanded = 'false'
+            container.addEventListener('click', () => {
+                container.dataset.expanded === 'false' ? container.dataset.expanded = 'true' : container.dataset.expanded = 'false';
+            })
+
+            function checkTaskWidth() {
+                if (container.offsetWidth < 400) {
+                    container.dataset.small = 'true'
+                } else {
+                    container.dataset.small = 'false'
+                }
+            }
+            window.addEventListener("resize", checkTaskWidth);
+            checkTaskWidth();
         return container
     }
     
