@@ -64,6 +64,11 @@ input {
     background-color: var(--front-secondary);
 }
 
+.input-label {
+    gap: 5px;
+    display: flex;
+}
+
 input:focus {
     background-color: var(--background-hover);
 }
@@ -82,6 +87,10 @@ input:focus {
 
 #priority-input:checked {
     background-color: var(--text-selected);
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
 }
 
 .form-buttons {

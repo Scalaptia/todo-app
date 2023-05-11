@@ -21,13 +21,14 @@ export default (() => {
         const titleLabel = document.createElement('label');
         titleLabel.classList.add('input-label');
         titleLabel.htmlFor = 'title-input';
-        titleLabel.innerText = 'Title*';
+        titleLabel.innerHTML = `Title <b style="color:red">*</b>`;
         Title.appendChild(titleLabel);
 
         const titleInput = document.createElement('input');
         titleInput.name = 'title-input';
         titleInput.id = 'title-input';
         titleInput.type = 'text';
+        titleInput.autocomplete = 'off';
         Title.appendChild(titleInput);
 
     const Description = createElement('div', 'input-container');
@@ -41,6 +42,7 @@ export default (() => {
         descriptionInput.name = 'description-input';
         descriptionInput.id = 'description-input';
         descriptionInput.type = 'text';
+        descriptionInput.autocomplete = 'off';
         Description.appendChild(descriptionInput);
 
     const DueDate = createElement('div', 'input-container');

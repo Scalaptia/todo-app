@@ -105,14 +105,12 @@ export default (() => {
             })
 
             function checkTaskWidth() {
-                if (container.offsetWidth < 400) {
-                    container.dataset.small = 'true'
-                } else {
-                    container.dataset.small = 'false'
-                }
+                console.log(container.offsetWidth);
+                (container.offsetWidth > 400) ? container.dataset.small = 'false' : container.dataset.small = 'true';
             }
             window.addEventListener("resize", checkTaskWidth);
-            checkTaskWidth();
+            setTimeout(checkTaskWidth, 0); // Initial check (timeout is necessary because when the element created its width is === 0)
+
         return container
     }
     
