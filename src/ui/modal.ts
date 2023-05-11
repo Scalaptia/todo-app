@@ -31,6 +31,7 @@ export default (() => {
                 formContainer.appendChild(Form.Priority);
                 formContainer.appendChild(Buttons);
                 formContainer.addEventListener('keydown', form.handleSubmitEvent);
+                formContainer.addEventListener('keydown', form.handleCancelEvent);
 
         container.appendChild(modalTitle);
         container.appendChild(formContainer);
@@ -62,13 +63,14 @@ export default (() => {
                 formContainer.appendChild(Form.DueDate);
                 formContainer.appendChild(Form.Priority);
                 formContainer.appendChild(Buttons);
+                formContainer.addEventListener('keydown', form.handleEditEvent);
+                formContainer.addEventListener('keydown', form.handleCancelEvent);
 
         container.appendChild(modalTitle);
         container.appendChild(formContainer);
 
         modal.appendChild(container);
         return modal;
-
     }
 
     function projectModal() {
@@ -85,6 +87,8 @@ export default (() => {
                 formContainer.dataset.type = 'project';
                 formContainer.appendChild(Form.Title);
                 formContainer.appendChild(Buttons);
+                formContainer.addEventListener('keydown', form.handleSubmitEvent);
+                formContainer.addEventListener('keydown', form.handleCancelEvent);
 
             
         container.appendChild(modalTitle);
