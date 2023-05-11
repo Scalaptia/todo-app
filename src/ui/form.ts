@@ -74,8 +74,12 @@ export default (() => {
     const Submit = document.createElement('button');
         Submit.classList.add('form-submit-btn');
         Submit.innerText = 'Add';
-        Submit.addEventListener('click', (event) => {
-            const parent = ((event.target as HTMLElement).parentNode as HTMLElement).parentNode as HTMLElement;
+        Submit.addEventListener('click', handleSubmitEvent);
+
+        function handleSubmitEvent(event: MouseEvent | KeyboardEvent) {
+            console.log(event)
+            if((event as KeyboardEvent).key === 'Enter' || (event as MouseEvent).type === 'click') {
+                const parent = ((event.target as HTMLElement).parentNode as HTMLElement).parentNode as HTMLElement;
                 switch (parent.dataset.type) {
                     case 'project':
                         projectList.addProject(titleInput.value);
@@ -98,7 +102,8 @@ export default (() => {
 
                 clearForm();
                 Modal.toggleModal()
-        });
+            }
+        }
 
     const Cancel = document.createElement('button');
         Cancel.classList.add('form-cancel-btn');
@@ -159,5 +164,6 @@ export default (() => {
         descriptionInput,
         dateInput,
         priorityInput,
+        handleSubmitEvent
     }
 })()

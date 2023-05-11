@@ -2,6 +2,7 @@ import { createElement } from "./pageUI"
 import '../styles/modal.css'
 import Form from "./form";
 import { Todo } from "../modules/todoFactory";
+import form from "./form";
 
 export default (() => {
     const modal = createElement('div', 'modal');
@@ -29,6 +30,7 @@ export default (() => {
                 formContainer.appendChild(Form.DueDate);
                 formContainer.appendChild(Form.Priority);
                 formContainer.appendChild(Buttons);
+                formContainer.addEventListener('keydown', form.handleSubmitEvent);
 
         container.appendChild(modalTitle);
         container.appendChild(formContainer);

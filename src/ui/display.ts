@@ -101,11 +101,16 @@ export default (() => {
             container.dataset.taskid = `${todo.id}`
             container.dataset.expanded = 'false'
             container.addEventListener('click', () => {
-                container.dataset.expanded === 'false' ? container.dataset.expanded = 'true' : container.dataset.expanded = 'false';
+                if (container.dataset.expanded === 'false') {
+                    const tasklist = container.parentNode!.querySelectorAll('.task') as NodeListOf<HTMLElement>;
+                    tasklist.forEach(el => el.dataset.expanded = 'false');
+                    container.dataset.expanded = 'true';
+                } else if (container.dataset.expanded === 'true') {
+                    container.dataset.expanded = 'false';
+                }
             })
 
             function checkTaskWidth() {
-                console.log(container.offsetWidth);
                 (container.offsetWidth > 400) ? container.dataset.small = 'false' : container.dataset.small = 'true';
             }
             window.addEventListener("resize", checkTaskWidth);
