@@ -96,6 +96,7 @@
 .project-list {
     overflow: scroll;
     scrollbar-width: none;
+    padding-bottom: 1px; /* Fixed outline */
 }
 
 .project-list::-webkit-scrollbar {

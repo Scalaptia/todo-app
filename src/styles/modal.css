@@ -54,7 +54,7 @@
     padding: 5px;
 }
 
-input {
+input, textarea {
     border: none;
     outline: none;
     border-radius: 10px;
@@ -69,8 +69,35 @@ input {
     display: flex;
 }
 
-input:focus {
+input:focus, textarea:focus {
     background-color: var(--background-hover);
+}
+
+#description-input {
+    resize: vertical;
+    min-height: 3rem;
+    max-height: 12rem;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    overflow: auto;
+}
+
+#description-input::-webkit-scrollbar {
+    width: 8px;
+}
+
+#description-input::-webkit-scrollbar-thumb {
+    background-color: var(--front-secondary);
+    border-radius: 4px;
+}
+
+#description-input::-webkit-scrollbar-thumb:hover {
+    background-color: #55555580;
+}
+
+#description-input::-webkit-scrollbar-track {
+    background-color: rgb(26, 26, 26);
+    border-radius: 4px;
 }
 
 #priority-input {

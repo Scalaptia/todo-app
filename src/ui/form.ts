@@ -38,11 +38,9 @@ export default (() => {
         descriptionLabel.innerText = 'Description';
         Description.appendChild(descriptionLabel);
 
-        const descriptionInput = document.createElement('input');
+        const descriptionInput = document.createElement('textarea');
         descriptionInput.name = 'description-input';
         descriptionInput.id = 'description-input';
-        descriptionInput.type = 'text';
-        descriptionInput.autocomplete = 'off';
         Description.appendChild(descriptionInput);
 
     const DueDate = createElement('div', 'input-container');
