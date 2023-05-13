@@ -94,9 +94,18 @@ export default (() => {
 
                 tabDelete.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    display.displayTasks(undefined!)
-                    const targetProject = projectArray.projects.filter(obj => obj.id === id);
-                    projectArray.removeProject(targetProject[0]);
+                    const activeTab = projectList.querySelector('[data-selected="true"]');
+                    const targetProject = projectArray.projects.filter(obj => obj.id === id)[0];
+                    
+                    if (activeTab) {
+                        const activeTabID = parseInt(activeTab!.getAttribute('data-projectid')!);
+                        const activeProject = projectArray.projects.filter(obj => obj.id === activeTabID)[0];
+                        if (activeProject === targetProject) {
+                            display.displayTasks(undefined!);
+                        }
+                    }
+                    
+                    projectArray.removeProject(targetProject);
                 });
             buttonsContainer.appendChild(tabDelete);
         

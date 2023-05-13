@@ -93,6 +93,15 @@
 }
 
 /* Add Project section*/
+.project-list {
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.project-list::-webkit-scrollbar {
+    display: none;
+}
+
 .add-project-section {
     color:  var(--text-selected);
     display: flex;

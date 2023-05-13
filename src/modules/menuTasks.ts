@@ -30,7 +30,7 @@ export default function (MenuItem: MenuItem) {
             });
             break;
         case 2:
-            const oneWeekFromNow = addHours(today, 24);
+            const oneWeekFromNow = addHours(today, 168);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
                     if (!todo.status){
