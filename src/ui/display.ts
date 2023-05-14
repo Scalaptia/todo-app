@@ -98,6 +98,12 @@ export default (() => {
                 rightContainer.appendChild(taskPriority);
             container.appendChild(rightContainer);
 
+            const descriptionContainer = createElement('div', 'task-bottom');
+                const taskDescription = createElement('div', 'task-description');
+                taskDescription.innerText = todo.description;
+                descriptionContainer.appendChild(taskDescription);
+            container.appendChild(descriptionContainer);
+
             container.dataset.taskid = `${todo.id}`
             container.dataset.expanded = 'false'
             container.addEventListener('click', () => {
@@ -111,7 +117,7 @@ export default (() => {
             })
 
             function checkTaskWidth() {
-                (container.offsetWidth > 400) ? container.dataset.small = 'false' : container.dataset.small = 'true';
+                (container.offsetWidth > 500) ? container.dataset.small = 'false' : container.dataset.small = 'true';
             }
             window.addEventListener("resize", checkTaskWidth);
             setTimeout(checkTaskWidth, 0); // Initial check (timeout is necessary because when the element created its width is === 0)
