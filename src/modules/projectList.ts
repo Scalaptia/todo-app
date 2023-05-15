@@ -8,7 +8,7 @@ export default (() => {
 
     function setProjects(newProjects: Project[]) {
         newProjects.reverse().forEach((proj: Project) => {
-            addProject(proj)
+            addProject(proj);
         });
     }
 
@@ -21,7 +21,7 @@ export default (() => {
             case 'string':
                 if (name.length > 0) {
                     navbar.createTab('project', name, projectIcon, projectIDs);
-                    let tempProject = createProject(name, projectIDs) ;
+                    let tempProject = createProject(name, projectIDs);
                     projects.unshift(tempProject);
                     console.log(projectIDs)
                     projectIDs++;
@@ -32,10 +32,12 @@ export default (() => {
 
                 break;
             default:
-                if (name instanceof Object && 'id' in name) {
-                    console.log(name)
+                if (name instanceof Object) {
                     navbar.createTab('project', name.title, projectIcon, name.id);
-                    projects.unshift(name);
+                    let tempProject = createProject(name.title, name.id, name.todoList);
+                    projects.unshift(tempProject);
+                    console.log(tempProject)
+                    updateLocalStorage()
                 }
 
                 break;

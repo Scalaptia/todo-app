@@ -11,9 +11,10 @@ export interface Project {
     removeTodo: (todo: Todo) => void;
 }
 
-export const createProject = (title: string, id: number) => {
+export const createProject = (title: string, id: number, todos?: Todo[]) => {
     const type = 'project'
-    const todoList: Todo[] = [];
+    let todoList: Todo[] = [];
+    if (todos) { todoList = todos }
     let taskIDs = 0
 
     function addTodo(this: Project, taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
