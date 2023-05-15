@@ -75,7 +75,6 @@ export default (() => {
                         event.stopPropagation();
                         container.dataset.editing = 'true';
                         modal.editTaskModal(todo);
-                        projectList.updateLocalStorage();
                     });
                     rightContainer.appendChild(taskEdit);
         
@@ -96,6 +95,7 @@ export default (() => {
                     event.stopPropagation();
                     todo.priority = !todo.priority
                     todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
+                    projectList.updateLocalStorage();
                 })
                 rightContainer.appendChild(taskPriority);
             container.appendChild(rightContainer);
@@ -184,6 +184,8 @@ export default (() => {
         tab.todoList.forEach(todo => {
             tasksSection.appendChild(createTaskEl(todo, tab));
         })
+
+        projectList.updateLocalStorage();
     }
 
     const main = (() =>{

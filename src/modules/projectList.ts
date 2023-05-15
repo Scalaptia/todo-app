@@ -27,7 +27,7 @@ export default (() => {
                     projects.unshift(tempProject);
                     console.log(projectIDs)
                     projectIDs++;
-                    updateLocalStorage()
+                    updateLocalStorage();
                 } else {
                     throw new Error('Project title must contain at least 1 charater');
                 }
@@ -39,7 +39,7 @@ export default (() => {
                     let tempProject = createProject(name.title, name.id, name.todoList);
                     projects.unshift(tempProject);
                     console.log(tempProject)
-                    updateLocalStorage()
+                    updateLocalStorage();
                 }
 
                 break;
