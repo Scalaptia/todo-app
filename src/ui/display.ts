@@ -11,6 +11,7 @@ import deleteSVG from '../assets/delete.svg'
 import starSVG from '../assets/star.svg'
 import starCheckedSVG from '../assets/star-filled.svg'
 import { handleToggleNavbar } from "./navbar";
+import projectList from "../modules/projectList";
 
 export default (() => {
     function isProject(obj: any): obj is Project {
@@ -74,6 +75,7 @@ export default (() => {
                         event.stopPropagation();
                         container.dataset.editing = 'true';
                         modal.editTaskModal(todo);
+                        projectList.updateLocalStorage();
                     });
                     rightContainer.appendChild(taskEdit);
         
@@ -196,5 +198,6 @@ export default (() => {
     return {
         main,
         displayTasks,
+        isProject,
     }
 })()

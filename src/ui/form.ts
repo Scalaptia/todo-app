@@ -91,7 +91,7 @@ export default (() => {
                             let timezoneOffset = selectedDate.getTimezoneOffset();
                             selectedDate.setMinutes(selectedDate.getMinutes() + timezoneOffset);
                         }
-
+                        console.log(targetProjectObject)
                         targetProjectObject.addTodo(titleInput.value, descriptionInput.value, selectedDate, priorityInput.checked!, false);
                         break;
                 }

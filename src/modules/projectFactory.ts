@@ -1,4 +1,5 @@
 import display from "../ui/display";
+import projectList from "./projectList";
 import { Todo, createTodo } from "./todoFactory";
 
 export interface Project {
@@ -20,6 +21,7 @@ export const createProject = (title: string, id: number) => {
             this.todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
             taskIDs++
             display.displayTasks(this);
+            projectList.updateLocalStorage();
         } else {
             throw new Error('Todo title must contain at least 1 charater');
         }
@@ -29,6 +31,7 @@ export const createProject = (title: string, id: number) => {
         if (this.todoList.includes(todo)) {
             this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
+            projectList.updateLocalStorage();
         } else {
             throw new Error('Todo does not exist within the todoList array');
         }
