@@ -1,6 +1,7 @@
 import { Project, createProject } from "./projectFactory";
 import projectIcon from '../assets/menu.svg'
-import navbar from "../ui/navbar";;
+import navbar from "../ui/navbar";import { parseISO } from "date-fns";
+;
 
 export default (() => {
     let projects: Project[] = [];
@@ -9,6 +10,7 @@ export default (() => {
     function setProjects(newProjects: Project[]) {
         newProjects.reverse().forEach((proj: Project) => {
             addProject(proj);
+            proj.todoList.forEach((todo) => { if(typeof todo.dueDate === 'string') { todo.dueDate = parseISO(todo.dueDate) }});
         });
     }
 
