@@ -21,10 +21,8 @@ export default function (MenuItem: MenuItem) {
             const twentyFourHoursFromNow = addDays(today, 1);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if (!todo.status){
-                        if(isWithinInterval(todo.dueDate, { start: today, end: twentyFourHoursFromNow })){
-                            MenuItem.todoList.push(todo);
-                        }
+                    if (!todo.status && isWithinInterval(todo.dueDate, { start: today, end: twentyFourHoursFromNow })){
+                        MenuItem.todoList.push(todo);
                     }
                 });
             });
@@ -33,10 +31,8 @@ export default function (MenuItem: MenuItem) {
             const oneWeekFromNow = addHours(today, 168);
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if (!todo.status){
-                        if(isWithinInterval(todo.dueDate, {start: today, end: oneWeekFromNow})) {
-                            MenuItem.todoList.push(todo);
-                        }
+                    if (!todo.status && isWithinInterval(todo.dueDate, {start: today, end: oneWeekFromNow})){
+                        MenuItem.todoList.push(todo);
                     }
                 });
             });
@@ -44,15 +40,13 @@ export default function (MenuItem: MenuItem) {
         case 3:
             projectList.projects.forEach(project => {
                 project.todoList.forEach(todo => {
-                    if (!todo.status) {
-                        if(todo.priority) {
-                            MenuItem.todoList.push(todo);
-                        }
+                    if (!todo.status && todo.priority) {
+                        MenuItem.todoList.push(todo);
                     }
                 });
             });
             break;
         default:
-            throw "Menu item doesn't exist"
+            throw new Error("Menu item doesn't exist");
     }
 }

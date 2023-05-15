@@ -21,7 +21,7 @@ export const createProject = (title: string, id: number) => {
             taskIDs++
             display.displayTasks(this);
         } else {
-            throw 'Todo title must contain at least 1 charater';
+            throw new Error('Todo title must contain at least 1 charater');
         }
     }
 
@@ -30,7 +30,7 @@ export const createProject = (title: string, id: number) => {
             this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
         } else {
-            throw 'Todo does not exist within the todoList array';
+            throw new Error('Todo does not exist within the todoList array');
         }
     }
 

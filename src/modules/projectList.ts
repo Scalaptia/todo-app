@@ -4,7 +4,7 @@ import navbar from "../ui/navbar";
 
 export default (() => {
     const projects: Project[] = [];
-    let projectIDs = 1;
+    let projectIDs = 0;
 
     function addProject(title: string) {
         if (title.length > 0) {
@@ -13,7 +13,7 @@ export default (() => {
             projects.unshift(tempProject);
             projectIDs++;
         } else {
-            throw 'Project title must contain at least 1 charater';
+            throw new Error('Project title must contain at least 1 charater');
         }
     }
 
@@ -23,7 +23,7 @@ export default (() => {
             const index = projects.indexOf(project);
             projects.splice(index, 1);
         } else {
-            throw 'Project does not exist within the projects array';
+            throw new Error('Project does not exist within the projects array');
         }
     }
 

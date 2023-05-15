@@ -20,7 +20,7 @@ const createItem = (title: string, id: number) => {
     };
 }
 
-export default (() => {
+const menuList = (() => {
     const items: MenuItem[] = [];
     let menuIDs = 0;
 
@@ -30,7 +30,7 @@ export default (() => {
             items.push(createItem(title, menuIDs));
             menuIDs++;
         } else {
-            throw 'Menu item title must contain at least 1 charater';
+            throw new Error('Menu item title must contain at least 1 charater');
         }
     }
 
@@ -39,3 +39,5 @@ export default (() => {
         addItem,
     }
 })();
+
+export default menuList;
