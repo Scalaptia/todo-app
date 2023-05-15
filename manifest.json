@@ -1,0 +1,17 @@
+{
+    "name": "Todo App",
+    "short_name": "Todo",
+    "theme_color": "#232528",
+    "background_color": "#E5E5E5",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "https://scalaptia.github.io/todo-app/",
+    "description": "Todo app made by Scalaptia as a practice project using Typescript",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "https://scalaptia.github.io/todo-app/assets/logo-90be6459.svg",
+            "sizes": "800x800"
+        }
+    ]
+}
