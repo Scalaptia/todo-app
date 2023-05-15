@@ -1,4 +1,5 @@
 import display from "../ui/display";
+import projectList from "./projectList";
 import { Todo, createTodo } from "./todoFactory";
 
 export interface Project {
@@ -10,9 +11,10 @@ export interface Project {
     removeTodo: (todo: Todo) => void;
 }
 
-export const createProject = (title: string, id: number) => {
+export const createProject = (title: string, id: number, todos?: Todo[]) => {
     const type = 'project'
-    const todoList: Todo[] = [];
+    let todoList: Todo[] = [];
+    if (todos) { todoList = todos }
     let taskIDs = 0
 
     function addTodo(this: Project, taskTitle: string, taskDescription: string, dueDate: Date, priority: boolean, status: boolean) {
@@ -20,8 +22,9 @@ export const createProject = (title: string, id: number) => {
             this.todoList.push(createTodo(taskTitle, taskDescription, dueDate, priority, taskIDs, status));
             taskIDs++
             display.displayTasks(this);
+            projectList.updateLocalStorage();
         } else {
-            throw 'Todo title must contain at least 1 charater';
+            throw new Error('Todo title must contain at least 1 charater');
         }
     }
 
@@ -29,8 +32,9 @@ export const createProject = (title: string, id: number) => {
         if (this.todoList.includes(todo)) {
             this.todoList = this.todoList.filter(obj => obj !== todo);
             display.displayTasks(this);
+            projectList.updateLocalStorage();
         } else {
-            throw 'Todo does not exist within the todoList array';
+            throw new Error('Todo does not exist within the todoList array');
         }
     }
 

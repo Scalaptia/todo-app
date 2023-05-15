@@ -11,6 +11,7 @@ import deleteSVG from '../assets/delete.svg'
 import starSVG from '../assets/star.svg'
 import starCheckedSVG from '../assets/star-filled.svg'
 import { handleToggleNavbar } from "./navbar";
+import projectList from "../modules/projectList";
 
 export default (() => {
     function isProject(obj: any): obj is Project {
@@ -94,6 +95,7 @@ export default (() => {
                     event.stopPropagation();
                     todo.priority = !todo.priority
                     todo.priority ? taskPriority.src = starCheckedSVG : taskPriority.src = starSVG
+                    projectList.updateLocalStorage();
                 })
                 rightContainer.appendChild(taskPriority);
             container.appendChild(rightContainer);
@@ -182,6 +184,8 @@ export default (() => {
         tab.todoList.forEach(todo => {
             tasksSection.appendChild(createTaskEl(todo, tab));
         })
+
+        projectList.updateLocalStorage();
     }
 
     const main = (() =>{
@@ -196,5 +200,6 @@ export default (() => {
     return {
         main,
         displayTasks,
+        isProject,
     }
 })()

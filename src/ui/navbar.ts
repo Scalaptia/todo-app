@@ -138,7 +138,9 @@ export default (() => {
                     display.displayTasks(targetItem[0]);
                     break;
                 case 'project':
+                    console.log(projectArray.projects);
                     const targetProject = projectArray.projects.filter(obj => obj.id === id);
+                    console.log(targetProject)
                     display.displayTasks(targetProject[0]);
                     break;
             }
